@@ -1,0 +1,68 @@
+<ion-view ng-controller="tambahStokCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+      <div class="head-list warna">
+      <div>
+         <div class="head-list warna">
+            <h4 class="text-left judul-besar">
+               TAMBAH STOK
+               <div class="icon-kanan">
+                  <button class="btn btn-md btn-transparant" ng-click="addStock()">
+                  <i class="fa fa-floppy-o"></i>
+                  </button>
+               </div>
+            </h4>
+         </div>
+      </div>
+      <div class="margin10">
+      </div>
+      <div class="margin10 form-horizontal">
+         <div class="row">
+            <div class="col col-33">
+               <label>Nama produk </label>
+            </div>
+            <div class="col">
+               <input class="input-produk-detail" disabled ng-model="cc" placeholder="{{productDetail.product_name}}" type="text"></input>          
+            </div>
+         </div>
+         <div class="row">
+            <div class="col col-33">
+               <label>Supplier</label>
+            </div>
+            <div class="col">
+               <select class="text-center warna-select input-select" ng-options="x.user_id as x.name for x in supplier" ng-model="getInput.supplier"=>
+                  <option value="" disabled>Pilih Penyedia</option>
+               </select>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col col-33">
+               <label>Satuan</label>
+            </div>
+            <div class="col col-33">
+               <select class="text-center warna-select input-select" ng-options="z.id_unit as z.unit for z in productDetail.units" placeholder="{{productDetail.unit}}" ng-model="getInput.units">
+                  <option value="" disabled>Pilih Satuan</option>
+               </select>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col col-33">
+               <label>Jumlah Stock</label>
+            </div>
+            <div class="col col-33">        
+               <input type="number" ng-model="getInput.qty" class="input-produk-detail" placeholder="Stok" />
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col col-33">
+            <label>Harga</label>
+         </div>
+         <div class="col">        
+            <input type="number" ng-model="getInput.price" class="input-produk-detail" placeholder="Harga" />
+         </div>
+      </div>
+      <div class="row">
+         &nbsp;
+      </div>
+   </ion-content>
+</ion-view>

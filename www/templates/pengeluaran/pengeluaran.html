@@ -1,0 +1,135 @@
+<ion-view ng-controller="pengeluaranCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+  <ion-content>
+<!--       <div class="head-list warna">
+         <h4 class="text-left judul-besar">PENGELUARAN
+         <div class="icon-kanan">
+            <button class="btn btn-md btn-transparant" ui-sref="pos.list-pengeluaran">
+            	 <i class="fa fa-list-alt">
+            </button>
+            <button class="btn btn-md btn-transparant" ui-sref="pos.list-pengeluaran">
+            	  <i class="fa fa-plus"></i>
+            </button>
+            <button class="btn btn-md btn-transparant" ui-sref="pos.list-pengeluaran">
+            	 <i class="fa fa-pencil"></i>
+            </button>
+            <button class="btn btn-md btn-transparant" ui-sref="pos.list-pengeluaran">
+            	<i class="fa fa-floppy-o"></i>
+            </button>
+            <button class="btn btn-md btn-transparant" ui-sref="pos.list-pengeluaran">
+            <i class="fa fa-trash"></i>
+            </button>
+         </div>
+         </h4>
+      </div>
+		 -->
+
+      <div class="head-list warna">
+         <h4 class="text-left judul-besar">
+            PENGELUARAN
+            <div class="icon-kanan">
+               <button class="btn btn-md btn-transparant" ui-sref="pos.list-pengeluaran">
+             <i class="fa fa-list-alt"></i>
+               </button>
+               <button class="btn btn-md btn-transparant" ng-click="tambah(role_id)">
+               <i class="fa fa-plus" ></i>
+               </button>
+               <button class="btn btn-md btn-transparant" ng-click="tambah(role_id)">
+             	 <i class="fa fa-pencil"></i>
+               </button>
+               <button class="btn btn-md btn-transparant" ng-click="tambah(role_id)">
+				<i class="fa fa-floppy-o"></i>
+               </button>
+            </div>
+         </h4>
+      </div>
+		<div class="list list-inset">
+         <div class="row">
+            <div class="col">
+               <div class="item-custom input-group input-group-line-bottom">
+                  <i class="icon ion-search placeholder-icon"></i>
+                  <input ng-model="param.cari" type="text" class="" placeholder="Cari">
+               </div>
+               <a ng-click="scanBarcode()"><i class="fa fa-camera-retro"></i></a>
+            </div>
+         </div>
+      </div>
+
+		<tab-slide-box tab="0">
+	        <div class="tsb-icons warna margin10">
+	    		<div class="tsb-ic-wrp">
+					<ion-scroll direction="x" class="tsb-hscroll" style="height: 35px;">
+						<a ng-click="">SEMUA PENGELUARAN</a>
+						<a ng-click="">TELEPON</a>
+						<a ng-click="">INTERNET</a>
+						<a ng-click="">DLL</a>
+					</ion-scroll>
+				</div>
+	    	</div>
+
+	        <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)" >
+	            
+	            <ion-slide>
+
+	                <div class="margin10">
+	                       <div class="row">
+	                       		<div class="col ">
+	                       		 	<input type="text" class="inputpengeluaran" placeholder="ID PENGELUARAN">
+	                       		</div>
+	                       		<div class="col">
+	                       		 	<input type="text" class="inputpengeluaran" placeholder="NO PELANGGAN">
+	                       		</div>
+	                       </div>
+	                       <div class="row">
+	                       		<div class="col">
+	                       			<input type="text" class="inputpengeluaran" placeholder="JENIS PENGELUARAN">
+	                       		</div>
+	                       		<div class="col">
+	                       		 	<input type="text"  class="inputpengeluaran"placeholder="NAMA PELANGGAN">
+	                       		</div>
+	                       </div>
+	                         <div class="row">
+	                       		<div class="col">
+	                       			<textarea class="inputpengeluaran" placeholder="NOTE"></textarea>
+	                       		</div>
+	                       		<div class="col">
+	                       		 	<input type="number" class="inputpengeluaran" placeholder="BIAYA" min="1">
+	                       		</div>
+	                       </div>
+	                </div>
+
+                   	<div class="ratakanan">
+	       				<i class="fa fa-check white-stroke" style="color:green; margin-left=10px;"></i>
+	       				&nbsp;
+	       				<i class="fa fa-times white-stroke" style="color:red;"></i>
+       				</div> 
+
+                    <div class="row even tebal" style="margin-top: 40px !Important;">
+				          <div class="col">TANGGAL</div>
+				          <div class="col">NO FAKTUR</div>
+				          <div class="col">RP</div>
+					</div>
+
+					<div class="row odd">
+				          <div class="col">{{data.tanggalpengeluaran}}12/NOV/2015</div>
+				          <div class="col">{{data.nofaktur}}000012</div>
+				          <div class="col"> {{data.hargapengeluaran}}1.000.000</div>  	
+		            </div> 
+
+	            </ion-slide>
+
+               	<ion-slide>
+               	</ion-slide>
+
+               	<ion-slide>
+               	</ion-slide>
+
+               	<ion-slide>
+               	</ion-slide>
+
+	        </ion-slide-box>
+
+	    </tab-slide-box>
+				    
+  </ion-content>
+
+</ion-view>

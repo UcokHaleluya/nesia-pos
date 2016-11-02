@@ -1,0 +1,108 @@
+<ion-view ng-controller="kontakCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+      <div class="head-list warna">
+         <h4 class="text-left judul-besar">
+            KONTAK
+            <div class="icon-kanan">
+               <button class="btn btn-md btn-transparant" ng-click="tambah(role_id)">
+               <i class="fa fa-plus" ></i>
+               </button>
+            </div>
+         </h4>
+      </div>
+      <div class="list list-inset">
+         <div class="row">
+            <div class="col">
+               <div class="item-custom input-group input-group-line-bottom line-find">
+                  <i class="icon ion-search placeholder-icon"></i>
+                  <input type="text" placeholder="Cari" ng-model="cari">
+               </div>
+               <!-- <button class="btn btn-md btn-transparant">
+               <i class="fa fa-camera-retro" ></i>
+               </button> -->
+            </div>
+         </div>
+      </div>
+      <tab-slide-box tab="0">
+         <div class="tsb-icons warna" style="margin-top: 10px;">
+            <div class="tsb-ic-wrp">
+               <ion-scroll direction="x" class="tsb-hscroll" style="height: 35px; width:100%; text-align:center;">
+                  <div class="row text-center">
+                     <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="">PELANGGAN</a>
+                     </div>
+                     <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="">SALES</a>
+                     </div>
+                     <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="">PENYEDIA</a>
+                     </div>
+                  </div>
+               </ion-scroll>
+            </div>
+         </div>
+         <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+               <div class="detail-kategori" style="margin-top: 10px;">
+                  <div class="header-kategori">
+                     <div class="row even tebal" style="margin-top: 10px;">
+                        <div class="col col-25">ID</div>
+                        <div class="col">NAMA</div>
+                        <div class="col">HP</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="konten-kategori" ng-repeat="pelanggan in contacts.customers | filter:cari">
+                  <a href="#/pos/kontak/kontak-pelanggan/{{pelanggan.user_id}}">
+                     <div class="row odd">
+                        <div class="col col-25">{{pelanggan.user_id | numberFixedLen:6}}</div>
+                        <div class="col">{{pelanggan.name}}</div>
+                        <div class="col">{{pelanggan.mobile}}</div>
+                     </div>
+                  </a>
+               </div>
+            </ion-slide>
+            <ion-slide>
+               <div class="detail-kategori" style="margin-top: 10px;">
+                  <div class="header-kategori">
+                     <div class="row even tebal" style="margin-top: 10px;">
+                        <div class="col col-25">ID</div>
+                        <div class="col">NAMA</div>
+                        <div class="col">HP</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="konten-kategori" ng-repeat="sales in contacts.salesmen | filter:cari">
+                  <a href="#/pos/kontak/kontak-sales/{{sales.user_id}}">
+                     <div class="row odd">
+                        <div class="col col-25">{{sales.user_id | numberFixedLen:6}}</div>
+                        <div class="col">{{sales.name}}</div>
+                        <div class="col">{{sales.mobile}}</div>
+                     </div>
+                  </a>
+               </div>
+            </ion-slide>
+            <ion-slide>
+               <div class="detail-kategori" style="margin-top: 10px;">
+                  <div class="header-kategori">
+                     <div class="row even tebal" style="margin-top: 10px;">
+                        <div class="col col-25">ID</div>
+                        <div class="col">NAMA</div>
+                        <div class="col">HP</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="konten-kategori" ng-repeat="penyedia in contacts.suppliers | filter:cari">
+                  <a href="#/pos/kontak/kontak-penyedia/{{penyedia.user_id}}">
+                     <div class="row odd">
+                        <div class="col col-25">{{penyedia.user_id | numberFixedLen:6}}</div>
+                        <div class="col">{{penyedia.name}}</div>
+                        <div class="col">{{penyedia.mobile}}</div>
+                     </div>
+                  </a>
+               </div>
+            </ion-slide>
+         </ion-slide-box>
+      </tab-slide-box>
+   </ion-content>
+</ion-view>

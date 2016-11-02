@@ -1,0 +1,85 @@
+<ion-view ng-controller="riwayatGudangCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+    <ion-content>
+            <div class="head-list warna">
+      <h4 class="text-left judul-besar">
+       RIWAYAT TRANSFER        
+      </h4>
+    </div>
+
+      <div class="row">          
+        <div class="col even" style="margin-bottom: 10px;">            
+          <a ng-click="getAll()" style="margin-left : 1%;" href="" align="center" class="button button-small">Tampilkan semua</a>
+          <input type="checkbox" ng-model="filter" name="vehicle" value="Bike" style="margin-left:5px;"> Filter
+        </div>                      
+      </div>
+
+      <div ng-show="filter">
+        <div class="row">
+         <div class="col col-33">
+           <label>Dari Gudang</label>
+         </div>
+         <div class="col">
+           <select class="text-center warna-select input-select" ng-options="x.id as x.name for x in gudang" ng-model="getInput.from_warehouse"=></select>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="col col-33">
+           <label>Ke Gudang</label>
+         </div>
+         <div class="col">
+           <select class="text-center warna-select input-select" ng-options="x.id as x.name for x in gudang" ng-model="getInput.to_warehouse"=></select>
+         </div>
+      </div>
+      <div class="even"><hr></div>
+        <div class="row">
+         <div class="col col-33">
+           <label>Dari Tgl</label>
+         </div>
+         <div class="col">
+           <input ng-model="tgl.from_date" class="input-produk-detail" type="date">
+         </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-33">
+          <label>Sampai Tgl</label>
+        </div>
+        <div class="col">
+          <input ng-model="tgl.to_date" class="input-produk-detail" type="date">
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col col-33">&nbsp;</div>
+          <div class="col">
+             <button class="btn btn-default pull-right" ng-click="request()">Tampilkan</button>
+          </div>
+      </div>
+      </div>               
+	    <div class="row">
+          <div class="col list list-inset">
+             <div class="item-custom input-group input-group-line-bottom">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input ng-model="cari" type="text" placeholder="Cari">
+             </div>             
+          </div>
+       </div>
+	    <div class="row">
+          <div class="margin10" style="width: 100%; font-size: 12px;">
+             <div class="row even tebal">
+                <div class="col">DARI GUDANG</div>
+                <div class="col">TANGGAL</div>
+                <div class="col">JENIS BARANG</div>
+                <div class="col">KET</div>
+             </div>
+             <div class="row odd" ng-repeat="list in transferHistory.data | filter: {product_name : cari}">
+                <div class="col" ng-bind="showName(list.from_warehouse)"></div>
+                <div class="col" ng-bind="showDate(list.created_at)"></div>
+                <div class="col" ng-bind="showItems(list.items)"></div>
+                <div class="col" ng-bind="showRemarks(list.remarks)"></div>                
+             </div>                     
+          </div>
+       </div>
+    </ion-content>
+</ion-view>

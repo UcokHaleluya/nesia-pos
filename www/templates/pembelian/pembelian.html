@@ -1,0 +1,256 @@
+<ion-view ng-controller="pembelianCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+
+  <ion-content>
+
+	  <div class="head-list warna" style="padding: 0.02px;">
+      <h4 class="text-left judul-besar">PEMBELIAN</h4>
+    </div>
+
+      <div class="list list-inset">
+          <div class="row">
+            <div class="col">
+              <div class="item-custom input-group input-group-line-bottom">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input ng-model="param.cari" type="text" class="" placeholder="Cari menggunakan Nama Produk / ID">
+              </div> 
+              <a ng-click="scanBarcode()"><i class="fa fa-camera-retro"></i></a>
+            </div>
+          </div> 
+      </div>
+    <div>
+
+      <form ng-click="">
+
+        <div class="margin10">
+
+          <div class="row">
+
+            <div class="col col-40">
+              <label class="item item-input custompengeluaran">
+                <input type="date" class="inputpengeluaran">
+              </label>
+            </div>
+
+            <div class="col">
+              <input type="number" class="inputpengeluaran" placeholder="NO. FAKTUR" min="1">
+            </div>
+
+            <div class="col">
+              <div class="h5 text-center" style="margin: 0;">
+                <select class="text-center warna-select input-produk-detail">
+                  <option>PENYEDIA 1</option>
+                  <option>PENYEDIA 2</option>
+                  <option>PENYEDIA 3</option>
+                  <option>+ TAMBAH PENYEDIA</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="margin10">
+
+          <div class="row even">
+
+            <div class="col">
+              <img src="img/ionic.png" width="100%" height="100%">
+            </div>
+
+            <div class="col col-40">
+
+              <div class="row">
+                <span>100001</span>
+              </div>
+
+              <div class="row">
+                <input type="text" class="input-produk-detail" value="NASI GORENG TELOR" />
+              </div>
+
+              <div class="row">
+                <div class="h5 text-center" style="width: 100% !important;">
+                  <select class="text-center warna-select input-select">
+                    <option>KATEGORI</option>
+                    <option>MAKANAN</option>
+                    <option>MINUMAN</option>
+                    <option>+ KATEGORI</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="h5 text-center" style="margin: 0 !important; width: 100% !important;">
+                  <select class="text-center warna-select input-select">
+                    <option>PRODUK</option>
+                    <option>NASI GORENG</option>
+                    <option>MIE GORENG</option>
+                    <option>+ PRODUK</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row" style="margin: 5px 0 !Important; padding: 0px !important">
+                <div class="col col-25" style="margin: 5px 0 !Important; padding: 0px !important">
+                  <input type="number" class="inputpengeluaran" placeholder="1" min="1" style="padding-left: 1% !important">
+                </div>
+                <div class="col col-75" style="padding-right: 0 !Important">
+                  <div class="h5 text-center" style="margin: 0 !important; width: 100% !important;">
+                  <select class="text-center warna-select input-select">
+                    <option>/PCS</option>
+                    <option>/PIRING</option>
+                  </select>
+                </div>
+                </div>
+              </div>
+
+              <div class="row">
+                @&nbsp;<input type="text" class="input-produk-detail" value="2.000.000" disabled="true" />
+              </div>
+
+            </div>
+
+            <div class="col col-40">
+              <div class="row" style="margin: 5px auto !Important;">
+                <input type="text" class="input-produk-detail" placeholder="DISKON TAMBAHAN" />
+              </div>
+              <div class="row" style="margin: 10px auto !Important;">
+                <input type="text" class="input-produk-detail" placeholder="BIAYA TAMBAHAN" />
+              </div>
+              <div class="row" style="float: right;">
+                <h6>TOTAL BIAYA</h6>
+              </div>
+              <div class="row" style="margin: 10px auto !Important;">
+                <input type="text" class="input-produk-detail" placeholder="TOTAL BIAYA" />
+              </div>
+              <div class="row">
+                &nbsp;
+              </div>
+              <div class="row" style="float: right !important;">
+                <div class="col">
+                </div>
+                <div class="col">
+                  <i class="fa fa-check white-stroke" style="color:green;"></i>
+                  &nbsp;&nbsp;
+                  <i class="fa fa-times white-stroke" style="color:red;"></i>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="margin10">
+
+          <div class="row even tebal" style="padding: 5px !Important;">
+            <div style="width: 20%;">ID</div>
+            <div style="width: 30%;">NAMA</div>
+            <div style="width: 7.5%;">#</div>
+            <div style="width: 7.5%;">%</div>
+            <div style="width: 30%;">RP</div>
+            <div style="width: 5%;"></div>
+          </div>
+
+          <div class="row odd" style="padding: 5px !Important;">
+            <div style="width: 20%;">100001</div>
+            <div style="width: 30%;">NASI GORENG SEAFOOD</div>
+            <div style="width: 7.5%;">1</div>
+            <div style="width: 7.5%;">0</div>
+            <div style="width: 30%;">2.0000.000</div>
+            <div style="width: 5%;">
+              <i class="fa fa-times white-stroke" style="color:red;"></i>
+            </div>
+          </div>
+
+          <div class="row even" style="padding: 5px !Important;">
+            <div style="width: 20%;">100002</div>
+            <div style="width: 30%;">NASI GORENG AYAM</div>
+            <div style="width: 7.5%;">2</div>
+            <div style="width: 7.5%;">0</div>
+            <div style="width: 30%;">1.0000.000</div>
+            <div style="width: 5%;">
+              <i class="fa fa-times white-stroke" style="color:red;"></i>
+            </div>
+          </div>
+
+          <div class="row odd" style="padding: 5px !Important;">
+            <div style="width: 20%;">100003</div>
+            <div style="width: 30%;">NASI GORENG TELUR</div>
+            <div style="width: 7.5%;">2</div>
+            <div style="width: 7.5%;">0</div>
+            <div style="width: 30%;">3.0000.000</div>
+            <div style="width: 5%;">
+              <i class="fa fa-times white-stroke" style="color:red;"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="margin10">
+
+          <div class="row odd">
+
+            <div class="col col-75 text-right">
+              <span>SUB TOTAL</span>
+            </div>
+            <div class="col text-right">
+              <span>6.000.000</span>
+            </div>
+
+          </div>
+
+          <div class="row even">
+
+            <div class="col col-75 text-right">
+              <span>PAJAK</span>
+            </div>
+            <div class="col text-right">
+              <input type="number" class="inputpengeluaran" placeholder="1" min="1" style="padding-left: 5px !important; width: 70% !Important; float: left !Important;">&nbsp;%
+            </div>
+
+          </div>
+
+          <div class="row odd">
+
+            <div class="col col-75 text-right">
+              <span>DISKON</span>
+            </div>
+            <div class="col text-right">
+              <div class="h5 text-center" style="margin: 0;">
+                <select class="text-center warna-select input-produk-detail">
+                  <option>10%</option>
+                  <option>20%</option>
+                  <option>50%</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row even">
+
+            <div class="col col-75 text-right">
+              <span>GRAND TOTAL</span>
+            </div>
+            <div class="col text-right">
+              <span>400.000</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="margin10" style="padding: 10px !important;">
+          <div class="row">
+            <div class="col-60">
+              <textarea class="inputpengeluaran" placeholder="NOTE"></textarea>
+            </div>
+            <div class="col" style="margin-top: 25px !Important;">
+              <input type="submit" name="submit" class="btn btn-default" value="BELI"> 
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+  </ion-content>
+</ion-view>

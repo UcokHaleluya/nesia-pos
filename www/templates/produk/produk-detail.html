@@ -1,0 +1,144 @@
+<ion-view ng-controller="produkDetailCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+  <ion-content >
+    <div class="head-list warna">
+      <h4 class="text-left judul-besar">
+        {{produklist.parent_category_name}}
+        <div class="icon-kanan">
+          <button class="btn btn-md btn-transparant" ng-disabled="ktgDisable" ui-sref="pos.produk-riwayat({id:param.jenis, nama:produklist.category_name})">
+            <i class="fa fa-calendar" ></i>
+          </button>               
+          <button class="btn btn-md btn-transparant" ng-click="ediKategori()">
+            <i class="fa fa-font" ></i>
+          </button>
+        </div>
+      </h4>
+    </div>
+    <div>
+      <div class="row" style="padding: 0 !important;">
+        <div class="col" style="padding: 0 !important;">
+          <div id="produk-id" style="margin: 7%;">
+            <div class="h5 text-center" style="margin: 0; float:">
+              <select class="text-center warna-select input-select" ng-model="param.kategori" ng-disabled="disabled" ng-change="pilihProduk()" id="kategori" ng-options="x.id as x.name for x in ktgList">                
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col" style="padding: 5px !important;">
+          <div class="row">
+            <div class="col" style="padding: 5px !important;">
+              <img class="gambar-produk" ng-if="headImage[0]" src="{{headImage[0]}}" width="100%">
+              <img class="gambar-produk" ng-if="!headImage[0]" src="img/img_icon.png" width="100%">
+            </div>
+            <div class="col" style="padding: 5px !important;">
+              <img class="gambar-produk" ng-if="headImage[1]" src="{{headImage[1]}}" width="100%">
+              <img class="gambar-produk" ng-if="!headImage[1]" src="img/img_icon.png" width="100%">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col" style="padding: 5px !important;">
+             <img class="gambar-produk" ng-if="headImage[2]" src="{{headImage[2]}}" width="100%">
+              <img class="gambar-produk" ng-if="!headImage[2]" src="img/img_icon.png" width="100%">
+            </div>
+            <div class="col" style="padding: 5px !important;">
+             <img class="gambar-produk" ng-if="headImage[3]" src="{{headImage[3]}}" width="100%">
+              <img class="gambar-produk" ng-if="!headImage[3]" src="img/img_icon.png" width="100%">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="warna">
+      <div class="row">
+        <div class="col">        
+          <select class="text-center warna-select input-select" ng-model="param.jenis" ng-options="x.id as x.name for x in subcategories" ng-disabled="disabled">
+          </select>
+        </div>
+        <div class="col">
+          <div style="margin-top: 5px; margin-right: 10px;float: right; font-size: 20px; text-indent: 10px; border-left: none;">
+               <button class="btn btn-md btn-transparant" ng-click="edit()">
+               <i class="fa fa-pencil" ng-style="iconEdit"></i>
+               </button> 
+               <button class="btn btn-md btn-transparant" ng-click="updateJenis()" ng-disabled="disabled">
+               <i class="fa fa-floppy-o" ></i>
+               </button> 
+               <button class="btn btn-md btn-transparant" ng-click="deleteproduk()">
+               <i class="fa fa-trash" ></i>
+               </button> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <ion-scroll direction="y" style="height: 100%;" class=""> -->
+      <div class="product-detail">
+      <div class="row" style="margin: 10px auto !important;">
+        <div class="col">
+          <img src="img/no-stock.png" width="80%" height="auto"/>
+        </div>
+        <div class="col-50">          
+          <img src="{{serverUrl}}/products/qrcode/{{id.id}}/{{produklist.code}}/{{produklist.name}}/{{param.productUnitPrice[0]}}/6" rel='nofollow' alt='Scan ME' style="width:80%; margin-left: 0px;"/>
+          <button class="btn btn-default qrcode"  ng-click="downloadQRcode(serverUrl,id.id, produklist.code, produklist.name, param.productUnitPrice[0])">Download QR Code</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col product-image" ng-repeat="(key, image) in images">
+          <a ng-click="showOpen({{key}})" ng-disabled="disabled">
+            <img src="{{image.image}}" height="auto" >
+          </a>
+        </div>
+      </div>    
+      
+      <div class="row">
+        <div class="col">
+          <label class="textproduct">JENIS ID</label>
+          <input type="text" class="input-produk-detail" disabled placeholder="{{produklist.code}}" />         
+        </div>
+        <div class="col">
+          <label class="textproduct">NAMA JENIS</label>
+          <input style="float:left;" ng-model="param.nama" type="text" class="input-produk-detail" placeholder="{{produklist.name}}" ng-disabled="disabled"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="textproduct">METODE STOK</label>
+          <select ng-change="stockMethodChanged()" ng-model="param.metodeStok" ng-value="{{produklist.stock_method}}" class="text-center warna-select input-select" ng-disabled="disabled" ng-options="m.value as m.value for m in methodStockOption">
+          </select>
+        </div>
+        <div class="col">
+          <label class="textproduct">TANGGAL PUBLIKASI</label>
+          <input type="text" placeholder="{{produklist.publish_date}}" disabled class="input-produk-detail"/>
+        </div>
+      </div>
+      </div>      
+      <div class="row">
+        <div class="col">
+          <label class="textproduct">SATUAN</label>
+          <div class="h5 text-center" style="margin: 0; padding: 0;">
+            <select class="text-center warna-select input-select" ng-disabled="disabled" ng-model="param.satuan" ng-options="u as u.unit for u in units" ng-change="unitChange()"></select>
+          </div>
+        </div>
+        <div class="col">
+          <label class="textproduct">DISKON</label>
+          <input ng-disabled="disabled" ng-model="param.diskon" type="number" class="input-produk-detail" placeholder="{{produklist.discount}}" style="height: 3.1em;font-size: 12px !important; width: 70px!important;"/>
+          <p style="margin-left: 75px;margin-top: -30px;font-size: 18px;">%</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label style="float:left;" class="textproduct">HARGA JUAL</label>
+          <div class="row" ng-repeat="(key, value) in selectedUnits track by $index">
+            <div class="col col-25">{{value.unit}}</div>
+            <div class="col">
+              <input ng-disabled="disabled" ng-model="param.productUnitPrice[$index]" style="height: 3.1em;font-size: 12px !important;" type="text" class="input-produk-detail" pattern="[0-9]+([\.,][0-9]+)*" format/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row margin10">
+        <div class="col" style="margin: 2px;">
+          <textarea ng-disabled="disabled" class="input-produk-detail" ng-model="param.description" placeholder="{{produklist.description}}" style="height: 100px; font-size: 14px !important;"></textarea>
+        </div>
+      </div>
+      </div>
+    <!-- </ion-scroll> -->
+  </ion-content>
+</ion-view>

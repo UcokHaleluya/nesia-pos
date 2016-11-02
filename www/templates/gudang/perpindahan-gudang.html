@@ -1,0 +1,134 @@
+<ion-view ng-controller="kontakCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content ng-controller="perpindahanGudangCtrl">
+      <div class="head-list warna">
+         <h4 class="text-left judul-besar">
+            TRANSFER ANTAR GUDANG
+            <div class="icon-kanan">
+               <button class="btn btn-md btn-transparant"ui-sref="pos.riwayat-transfer({id : ask})">
+               <i class="fa fa-calendar"></i>
+               </button>
+            </div>
+         </h4>
+      </div>
+      </div>
+      <div class="margin10 form-horizontal">
+         <div class="row">
+            <div class="col col-33">
+               <label>Dari Gudang </label>
+            </div>
+            <div class="col">
+               <input disabled class="input-produk-detail" placeholder="{{namaGUdang}}" type="text"/>
+            </div>
+         </div>
+      </div>
+      <div class="margin10">
+         <div class="row warna">
+            <div class="col col-33">
+               <div class="text-center">
+                  <select class="text-center warna-select input-select line-find" style="border:1px solid trasparent" ng-options="c.id as c.name for c in categories.data" ng-model="temp.category">
+                     <option value="" disabled>Kategori</option>
+                  </select>
+               </div>
+            </div>
+            <div class="col">
+               <div class="">
+                  <div class="item-custom input-group input-group-line-bottom line-find">
+                     <i class="icon ion-search placeholder-icon"></i>
+                     <input type="text" class="" ng-model="search" placeholder="Cari"/>
+                  </div>
+                  <button class="btn btn-md btn-transparant">
+                  <i class="fa fa-camera-retro"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      <ion-scroll zooming="false" direction="x" style="">
+         <div class="prod-list default">
+            <!-- <ion-list class="default"> -->
+            <div class="prod-img img-radio" ng-repeat="item in products | filter : {parent_category : temp.category, product_name : search }">
+               <ion-radio ng-model="selected_product" ng-click="productsSelected(item)">
+                  <div class="img">
+                     <img src="{{item.img == '' ? 'img/img_icon.png' : item.img}}"/>
+                  </div>
+                  <label>{{item.product_name}}</label>
+               </ion-radio>
+            </div>
+            <!-- </ion-list> -->
+         </div>
+      </ion-scroll>
+      <!-- Detail selected product -->
+      <div class="show_detail" ng-show="productDetail != null">
+         <div class="even">
+            <label style="margin-left:5px;">Detail Produk</label>
+         </div>
+         <div class="margin10">
+            <div class="row">
+               <!-- <div class="col col-33">
+                  {{(productDetail.code == "") ? "--" : productDetail.code}}
+                  </div> -->
+               <div class="col">
+                  Stok : {{productDetail.qty}} {{productDetail.unit}}
+               </div>
+               <div class="col">
+                  {{productDetail.product_name}}
+               </div>
+            </div>
+            <div class="row">
+               <div class="col col-40">
+                  <input type="number" ng-model="sendItem.jumlah" class="inputpengeluaran" min="1" style="padding-left: 1% !important; width: 25%; float: left !important;">
+                  <div class="text-center" style="font-size: x-small; margin: 0 5px !important; width: 65% !important; float: left !important;">
+                     <select class="text-center warna-select input-select" ng-model="sendItem.unit" ng-options="u.id_unit as u.unit for u in productDetail.units">
+                        <option value="" disabled>Satuan</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="col col-50">
+                  <select class="text-center warna-select input-select" ng-model="sendItem.gudang" ng-options="x.id as x.name for x in anotherWarehouses">
+                     <option value="" disabled>Gudang tujuan</option>
+                  </select>
+               </div>
+               <div class="col text-right" style="padding-top: 10px;">
+                  <button class="btn btn-sm btn-transparant" ng-click="itemForSent(productDetail.product_id, sendItem)">
+                  <i class="fa fa-check white-stroke" style="color:green;"></i>
+                  </button>
+                  &nbsp;&nbsp;
+                  <!-- <i class="fa fa-times white-stroke" style="color:red;"></i> -->
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end -->
+      <div class="margin10">
+         <table>
+            <tr>
+               <th>NAMA</th>
+               <th>TUJUAN</th>
+               <th>Qty</th>
+               <th></th>
+               <th></th>
+            </tr>
+            <tr ng-repeat="(key, prod) in sendParameter">
+               <td ng-bind="displayName(prod.product_id)"></td>
+               <td ng-bind="displayWarehouseName(prod.to_warehouse)"></td>
+               <td>{{prod.qty}}</td>
+               <td ng-bind="displayUnitName(prod.unit_id)"></td>
+               <td>
+                  <button class="btn btn-sm btn-transparant" ng-click="prod_delete(key, prod.qty, prod.product_id)">
+                  <i class="fa fa-times white-stroke" style="color:red;"></i>
+                  </button>
+               </td>
+            </tr>
+         </table>
+      </div>
+      <div class="margin10" style="margin-bottom:10px">
+         <div class="row">
+            <div class="col"></div>
+            <div class="col">
+               <button class="btn btn-default pull-right" ng-click="pushItem()">Simpan</button>
+            </div>
+         </div>
+      </div>
+   </ion-content>
+</ion-view>

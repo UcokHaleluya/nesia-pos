@@ -1,0 +1,108 @@
+<ion-view ng-controller="gudangCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+   <ion-scroll>
+      <div class="head-list warna">
+      <h4 class="text-left judul-besar">
+        GUDANG
+        <div class="icon-kanan">
+         <button class="btn btn-md btn-transparant" ui-sref="pos.perpindahan-gudang({id : linksId})">
+            <i class="fa fa-exchange"></i>
+         </button>
+         <button class="btn btn-md btn-transparant"ui-sref="pos.riwayat-gudang({id : linksId})">
+            <i class="fa fa-calendar"></i>
+         </button>
+         <button class="btn btn-md btn-transparant" ng-click="tambahGudang()">
+            <i class="fa fa-plus"></i>
+         </button>
+         <button class="btn btn-md btn-transparant" ng-click="enabled()">
+            <i class="fa fa-pencil" ng-style="iconEdit"></i>
+         </button>
+         <button class="btn btn-md btn-transparant" ng-click="saveWarehouse(linksId)">
+            <i class="fa fa-floppy-o"></i>
+         </button>
+         <button class="btn btn-md btn-transparant" ng-click="hapusGudang(linksId, namas)">
+            <i class="fa fa-trash"></i>
+         </button>
+        </div>
+      </h4>
+    </div>
+
+
+      </div>
+      <tab-slide-box tab="0">
+         <div class="tsb-icons warna">
+            <div class="tsb-ic-wrp">
+               <ion-scroll direction="x" class="tsb-hscroll" style="height: 35px;">
+                  <a ng-repeat="list in warehouses" ng-click="">{{list.name}}</a>                               
+               </ion-scroll>
+            </div>
+         </div>
+         <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index, sendLink(index))">
+            <ion-slide ng-repeat="list in warehouses" id="{{list.id}}" ng-repeat="list in warehouses" on-finish-render>
+               <div class="row">
+                  <div class="col">
+                     <div class="row row-center">
+                        <div class="col">
+                           <img src="img/warehouse-icon.png" width="100%vw" height="auto">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col col-67">
+                     <div class="row">
+                        <div class="col">
+                           <input ng-disabled="unEditable" class="input-gudang ng-pristine ng-untouched ng-invalid ng-invalid-required" type="text" name="namakantor" placeholder="{{list.name}}" ng-model="ware.name">
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col">
+                           <textarea  ng-hide="!list.address || list.address == null || list.address == ''" ng-disabled="unEditable" name="alamatkantor" ng-model="ware.address" class="input-gudang ng-pristine ng-untouched ng-valid" placeholder="{{list.address}}"></textarea>
+                           <textarea ng-show="!list.address || list.address == null || list.address == ''" ng-disabled="unEditable" name="alamatkantor" ng-model="ware.address" class="input-gudang ng-pristine ng-untouched ng-valid" placeholder="Alamat kantor belum ada"></textarea>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col">
+                           <input ng-disabled="unEditable" ng-hide="list.phone == null || list.phone == ''" class="input-gudang ng-pristine ng-untouched ng-invalid ng-invalid-required" type="text" ng-model="ware.nohp" placeholder="{{list.phone}}">
+                           <input ng-disabled="unEditable" type="text" ng-show="list.phone == null || list.phone == ''" class="input-gudang ng-pristine ng-untouched ng-invalid ng-invalid-required"  ng-model="ware.nohp" placeholder="No. Telepon tidak tersedia">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col list list-inset">
+                     <div class="item-custom input-group input-group-line-bottom line-find" style="width: 73%;">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input ng-model="cari" type="text" placeholder="Cari ">
+                     </div>                     
+                     <button style="margin: 0px ;color: white; padding: 5px;" class="btn btn-small btn-transparant"><i class="fa fa-camera-retro"></i></button> 
+                     <button style="margin: 0px ;color: white; padding: 5px;" class="btn btn-small btn-transparant" ui-sref="pos.produkBaruGudang({id : list.id, name: list.name})"><i class="fa fa-plus"></i></button>                  
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="margin10" style="width: 100%; font-size: 13px;">
+                     <div class="row even tebal header-kategori">                        
+                        <div class="col">PRODUK</div>
+                        <div class="col">JENIS</div>
+                        <div class="col">STOK</div>
+                        <div class="col">SATUAN</div>
+                     </div>                     
+                     <!-- <div ng-show="products.length > 0" class="row odd" ng-click="produtDetail(prod.id)" ng-repeat="prod in products | total : { warehouse_id : list.id} : this"> -->
+                     <ion-scroll zooming="true" direction="y" style="height: 50vh">
+                     <div ng-show="products.length > 0" class="row odd" ui-sref="pos.detailProdukGudang({ pid: prod.product_id, wid: prod.warehouse_id, wname : list.name, pname: prod.product_name, id : prod.id })" ng-repeat="prod in products | filter : {warehouse_id : list.id}">                     
+                        <div class="col">{{prod.child_category_name}}</div>                                            
+                        <div class="col">{{prod.product_name}}</div>
+                        <div class="col">{{prod.qty}}</div>
+                        <div class="col">{{prod.unit}}</div>                  
+                     </div>
+                     </ion-scroll>
+                     <div ng-show="products.length < 1" class="row odd">
+                        <div class="padding warna">Tidak ada produk</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row" style="padding-bottom: 30px;">&nbsp;</div>
+            </ion-slide>
+         </ion-slide-box>
+      </tab-slide-box>
+   </ion-scroll>    
+   </ion-content>
+</ion-view>

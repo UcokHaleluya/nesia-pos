@@ -1,0 +1,52 @@
+<ion-view ng-controller="detailProdukGudangCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>"> 
+<ion-content> 
+  <div class="head-list warna">
+  
+      <h4 class="text-left judul-besar">Detail Stok Produk
+      <div class="icon-kanan">
+          <button class="btn btn-default pull-right" ng-click="produtDetail()">
+          <i class="fa fa-plus" aria-hidden="true"></i> Stok
+          </button>      
+      </div>      
+     </h4>
+  </div>   
+   <div class="margin10 form-horizontal">
+      <div class="row">
+        <div class="col col-33">
+          <label>Nama Jenis</label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" disabled ng-model="aa" placeholder="{{namaProduct}}" type="text">     
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-33">
+          <label>Gudang</label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" disabled ng-model="cc" placeholder="{{namaGudang}}" type="text">  
+        </div>     
+    </div>
+  </div>
+  <ion-scroll zooming="true" direction="xy">
+    <table class="table-scroll strip">
+        <tr>
+            <th>KODE</th>
+            <th>SUPPLIER</th>
+            <th>STOK</th>
+            <th>HARGA</th>            
+        </tr>
+        <tr ng-repeat="prod in products" ng-show="products.length">
+            <td>{{prod.code}}</td>
+            <td>{{prod.supplier_name}}</td>
+            <td>{{prod.qty}} {{prod.unit}}</td>
+            <td ng-bind="toRp(prod.price)"></td>            
+        </tr>
+        <tr ng-hide="products.length">
+            <td colspan="5">Tidak ada produk</td>
+        </tr>
+    </table>
+ </ion-scroll>  
+ <div class="row" style="padding-bottom: 30px;">&nbsp;</div>
+</ion-content>
+</ion-view>

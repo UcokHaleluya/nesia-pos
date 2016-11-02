@@ -1,0 +1,229 @@
+<ion-view ng-controller="penjualanCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+      <div class="head-list warna">
+         <h4 class="text-left judul-besar">
+            PENJUALAN
+            <div class="icon-kanan" style="margin-top:-7px; font-size:14px; max-width: 60%; display:none;" ng-show="setting.use_warehouse">
+               <select class="text-center warna-select input-select line-find" ng-options="w as w.name for w in warehouses" ng-model="data.warehouse">
+               </select> 
+            </div>
+         </h4>
+      </div> 
+      <div class="margin10">
+         <div class="row warna">
+            <div class="col col-33">
+               <div class="text-center">
+                  <select class="text-center warna-select input-select line-find" style="font-size: small;border:1px solid trasparent;" ng-options="c.id as c.name for c in categories" ng-model="temp.category">
+                     <option value="">Semua</option>
+                  </select>
+               </div>
+            </div>
+            <div class="col">
+               <div>
+                  <div class="item-custom input-group input-group-line-bottom line-find">
+                     <i class="icon ion-search placeholder-icon"></i>
+                     <input type="text" ng-enter="productSearch()" ng-model="temp.search" placeholder="Cari"/>
+                  </div>
+                  <button class="btn btn-md btn-transparant" ng-click="scanBarcode()">
+                  <i class="fa fa-camera-retro"></i>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="baris">
+         <a class="kolom" ng-model="temp.selected_product" ng-click="product_click(item)" ng-repeat="item in products | filter_prod : { warehouse_id : data.warehouse.id, category_id: temp.category} : this">
+            <div class="img">
+               <img src="{{item.img == '' ? 'img/img_icon.png' : item.img}}"/>
+            </div>
+            <label class="default">{{item.product_name}}</label>
+         </a>
+      </div>
+      <p ng-hide="products.length > 0">{{nullMsg}}</p>
+      <div class="show_detail" ng-show="show_detail">
+         <div class="input-total">
+            <span style="margin:15px;">Detail Barang</span>
+         </div>
+         <div class="margin10">
+            <div class="row">
+               <div class="col col-33">
+                  {{(temp.product.code == "") ? "--" : temp.product.code}}
+               </div>
+               <div class="col col-73">
+                  {{temp.product.product_name}}
+               </div>
+            </div>
+            <div class="row">
+               <div class="col col-40">
+                  <input type="number" ng-model="temp.jumlah" class="inputpenjualan" placeholder="1" min="1" style="padding-left: 1% !important; width: 25%; float: left !important;">
+                  <div class="h5 text-center" style="margin: 0 5px !important; width: 65% !important; float: left !important;">
+                     <select class="text-center warna-select input-select" ng-model="temp.unit" ng-options="u as u.unit for u in temp.product.units">
+                     </select>
+                  </div>
+               </div>
+               <div class="col col-40" style="padding-top: 10px;">
+                  <!-- <span id="diskon" style="float: left;">%&nbsp;</span> -->
+                  <!-- <span>@</span> -->
+                  <span>{{temp.unit.price | currency : "Rp. " : 0}}</span>
+               </div>
+               <div class="col text-penjualan" style="padding-top: 10px;">
+                  <button class="btn btn-sm btn-transparant" ng-click="prod_add()">
+                  <i class="fa fa-check white-stroke" style="color:green;"></i>
+                  </button>
+                  &nbsp;&nbsp;
+                  <!-- <i class="fa fa-times white-stroke" style="color:red;"></i> -->
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end -->
+      <div class="margin10">
+         <table>
+            <tr ng-show="data.item.length > 0">
+               <th>KODE</th>
+               <th>NAMA</th>
+               <th>#</th>
+               <th>%</th>
+               <th>Rp.</th>
+               <th></th>
+            </tr>
+            <tr ng-repeat="(key, prod) in data.item">
+               <td>{{(prod.code == "") ? "--" : prod.code}}</td>
+               <td>{{prod.product_name}}</td>
+               <td>{{prod.jumlah}}</td>
+               <td>{{prod.discount}}</td>
+               <td>{{prod.total_price | currency : "Rp. " : 0}}</td>
+               <td>
+                  <button class="btn btn-sm btn-transparant" ng-click="prod_delete(key)">
+                  <i class="fa fa-times white-stroke" style="color:red;"></i>
+                  </button>
+               </td>
+            </tr>
+         </table>
+      </div>
+      <!-- Detail selected product -->      
+      <div class="margin10 tebal">
+         <div class="row odd">
+            <div class="col  text-penjualan col-45">
+               <span>SUB TOTAL 1</span>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col text-penjualan col-33">
+               <span>{{data.sub_total_1 | currency : "Rp. " : 0}}</span>
+            </div>
+         </div>
+         <div class="row input-total">
+            <div class="col text-penjualan">
+               <span>PAJAK 1</span>
+            </div>
+            <div class="col col-45">
+               <input type="number" class="inputpenjualan add-sale" placeholder="0" min="1" ng-change="count_total_price()" ng-model="temp.pajak_1">
+            </div>
+            <div class="col col-20 add-sale">
+              <span class="add-sale"> % </span>
+            </div>
+         </div>
+         <div class="row odd">
+            <div class="col text-penjualan">
+               <span>PAJAK 2</span>
+            </div>
+            <div class="col col-45">
+               <input type="number" class="inputpenjualan add-sale" placeholder="0" min="1" ng-change="count_total_price()" ng-model="temp.pajak_2">
+            </div>
+            <div class="col text-penjualan col-20">
+               <select class="text-center warna-select input-produk-detail" ng-model="temp.pajak_2_type" ng-change="count_total_price()">
+                  <option value="1">Rp</option>
+                  <option value="2">%</option>
+               </select>
+            </div>
+         </div>
+         <div class="row input-total">
+            <div class="col text-penjualan">
+               <span>DISKON</span> 
+            </div>
+            <div class="col col-45">
+               <input type="number" class="inputpenjualan add-sale" placeholder="0" ng-model="data.discount" ng-change="count_total_price()" min="1">
+            </div>
+            <div class="col col-20">
+               <select class="text-center warna-select input-produk-detail" ng-model="data.discount_type" ng-change="count_total_price()">
+                  <option value="1">Rp</option>
+                  <option value="2">%</option>
+               </select>
+            </div>
+         </div>
+         <div class="row odd">
+            <div class="col text-penjualan col-45">
+               <span>SUB TOTAL 2</span>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col col-33">
+               <span class="add-sale">{{data.sub_total_2 | currency : "Rp. " : 0}}</span>
+            </div>
+          
+         </div>
+      </div>
+      <div id="vieww">
+         <div class="margin10 payment">
+            <div class="row">
+               <div class="col">
+                  <span>GRAND TOTAL</span>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col">
+                  <input type="text" class="input-produk-detail" ng-model="data.grand_total" ng-disabled="true" pattern="[0-9]+([\.,][0-9]+)*" format>
+               </div>
+            </div>
+            <div class="row margin10">
+               <div class="col">
+                  <span>BAYAR</span>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col">
+                  <input type="number" class="input-produk-detail" ng-model="data.payment" ng-change="count_total_price()" placeholder="0">
+               </div>
+            </div>
+            <div class="row margin10">
+               <div class="col">
+                  <span>KEMBALIAN</span>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col">
+                  <input type="text" class="input-produk-detail change" ng-model="data.change" ng-disabled="true" pattern="[0-9]+([\.,][0-9]+)*" format>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="margin10">
+         <div class="row">
+            <div class="col">
+               <textarea class="input-kontak inputpenjualan-catatan" placeholder="Catatan" ng-model="data.note"></textarea>
+            </div>
+         </div>
+      </div>
+      <div class="margin10" style="margin-bottom:10px">
+         <div class="row">
+            <div class="col">
+               <ion-list class="default setting">
+                  <ion-checkbox ng-model="filter.red" style="font-size:10px">Print Struk</ion-checkbox>
+               </ion-list>
+            </div>
+            <div class="col">
+               <ion-list class="default setting">
+                  <ion-checkbox ng-model="data.sent_invoice" style="font-size:10px">Kirim Email</ion-checkbox>
+               </ion-list>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col" style="text-align:right; margin-right:35px;">
+               <button class="btn btn-default pull-right" ng-click="save()">Simpan</button>
+            </div>
+         </div>
+      </div>
+      </div>      
+   </ion-content>
+</ion-view>

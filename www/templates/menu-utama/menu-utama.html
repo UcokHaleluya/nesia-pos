@@ -1,0 +1,266 @@
+<ion-view ng-controller="menuUtamaCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'> <b>{{dataBusiness.name}}</b>">
+
+  <ion-content>
+    	<ion-refresher
+		    pulling-text="Tarik untuk menyegarkan..." on-refresh="doRefresh()">
+	  	</ion-refresher>
+
+  	<!-- Content -->
+            	<div class="iklan text-center">
+			<!-- 	 	<ion-slide-box show-pager="false" does-continue="true" auto-play="true" slide-interval="1000" on-slide-changed="slideChanged(index)"> -->
+          				<!-- <ion-slide class="text-center"> -->
+            				<i class="ion-android-calendar icon-iklan"></i>
+            				<input type="text" class="tanggal" ng-model="tanggal" disabled style="border: none !important;" />
+            			<!-- </ion-slide> -->
+<!--             			<ion-slide class="text-center iklan-toko">
+            				<i class="ion-ios-person-outline icon-iklan"></i>
+            				<div ng-model="tokoTerbaik">{{best_customer.name}}</div>
+            			</ion-slide>
+            			<ion-slide class="text-center iklan-promo">
+            				<i class="ion-bag icon-iklan"></i>
+            				<div ng-model="promoBerjalan"> BELI 2 DOMAIN, GRATIS SATU</div>
+            			</ion-slide>
+            		</ion-slide-box> -->
+				</div>
+			
+				<tab-slide-box tab="0">
+	                    <div class="tsb-icons warna">
+				    		<div class="tsb-ic-wrp">
+								<ion-scroll direction="x" class="tsb-hscroll" style="height: 35px;">
+									<a ng-click="">LAPORAN</a>
+									<a ng-click="">MINGGUAN</a>
+									<a ng-click="">BULANAN</a>
+								</ion-scroll>
+							</div>
+				    	</div>
+	                    <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+
+	                        <ion-slide>
+	                        	<div style="overflow-y: scroll; height: 100%;">	             
+	                        		<div class="container">
+	                        			<h3 class="text-left">HARI INI</h3>
+										<div class="detail">
+											<form>
+												<div class="row">
+													<div class="col text-right">
+														OMZET
+													</div>
+													<div class="col text-left" ng-model="omzet">
+														{{daily.table.omzet | currency : "Rp. " : 0}}
+													</div>
+												</div>
+
+												<div class="row" ng-show="businesstype === 'pro'" ng-show="dataRole.name != 'salesman'" >
+													<div class="col text-right">
+														PENDAPATAN
+													</div>
+													<div class="col text-left" ng-model="pendapatan">
+														{{daily.table.income | currency : "Rp. " : 0}}
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col text-right">
+														JUMLAH PRODUK
+													</div>
+													<div class="col text-left" ng-model="jumlahProduk">
+														{{daily.table.product}}
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col text-right">
+														TRANSAKSI
+													</div>
+													<div class="col text-left" ng-model="jumlahTransaksi">
+														{{daily.table.transaction}}
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col text-right">
+														TOTAL RETUR
+													</div>
+													<div class="col text-left" ng-model="jumlahRetur">
+														{{daily.retur.product}}
+													</div>
+												</div>
+
+												<div class="row" ng-show="setting.type === 'pro'">
+													<div class="col text-right">
+														PELANGGAN BARU
+													</div>
+													<div class="col text-left" ng-model="jumlahPelangganBaru">
+														{{daily.table.new_customer}}
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="chart margin10">
+											<div class="card">
+										        <div class="item item-text-wrap">
+										            <canvas id="line" class="chart chart-line" chart-data="daily.grafik.data" chart-labels="daily.grafik.labels" chart-legend="false" chart-series="false" chart-click="onClick">
+										           	</canvas> 
+										        </div>
+										    </div>
+										</div>
+									</div>
+								</div>
+	                        </ion-slide>
+
+	                        <ion-slide>
+	                        	<div style="overflow-y: scroll; height: 100%;">
+		                            <div class="container">
+										
+										<h3 class="text-left">MINGGU INI</h3>
+											<div class="detail">
+												<form>
+													<div class="row">
+														<div class="col text-right">
+															OMZET
+														</div>
+														<div class="col text-left" ng-model="omzet">
+															{{weekly.table.omzet | currency : "Rp. " : 0}}
+														</div>
+													</div>
+
+													<div class="row" ng-show="dataRole.name != 'salesman'">
+														<div class="col text-right">
+															PENDAPATAN
+														</div>
+														<div class="col text-left" ng-model="pendapatan">
+															{{weekly.table.income | currency : "Rp. " : 0}}
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col text-right">
+															JUMLAH PRODUK
+														</div>
+														<div class="col text-left" ng-model="jumlahProduk">
+															{{weekly.table.product}}
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col text-right">
+															TRANSAKSI
+														</div>
+														<div class="col text-left" ng-model="jumlahTransaksi">
+															{{weekly.table.transaction}}
+														</div>
+													</div>
+
+													<div class="row" ng-show="setting.type === 'pro'">
+														<div class="col text-right">
+															PELANGGAN BARU
+														</div>
+														<div class="col text-left" ng-model="jumlahPelangganBaru">
+															{{weekly.table.new_customer}}
+														</div>
+													</div>
+
+													<div class="row">
+														<div class="col text-right">
+															TOTAL RETUR
+														</div>
+														<div class="col text-left" ng-model="jumlahRetur">
+															{{weekly.retur.product}}
+														</div>
+													</div>
+												</form>
+											</div>
+											<div class="chart margin10">
+												<div class="card">
+											        <div class="item item-text-wrap">
+											            <canvas id="line" class="chart chart-line" chart-data="weekly.grafik.data" chart-labels="weekly.grafik.labels" chart-legend="false" chart-series="false" chart-click="onClick" >
+											           	</canvas> 
+											        </div>
+											    </div>
+											</div>
+
+									</div>
+								</div>
+	                        </ion-slide>
+
+	                        <ion-slide>
+	                        	<div style="overflow-y: scroll; height: 100%;">
+	                        		<div class="container">
+			                            <h3 class="text-left">BULAN INI</h3>
+										<div class="detail">
+											<form>
+												<div class="row">
+													<div class="col text-right">
+														OMZET
+													</div>
+													<div class="col text-left" ng-model="omzet">
+														{{monthly.table.omzet | currency : "Rp. " : 0}}
+													</div>
+												</div>
+
+												<div class="row" ng-show="dataRole.name != 'salesman'">
+													<div class="col text-right">
+														PENDAPATAN
+													</div>
+													<div class="col text-left" ng-model="pendapatan">
+														{{monthly.table.income | currency : "Rp. " : 0}}
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col text-right">
+														JUMLAH PRODUK
+													</div>
+													<div class="col text-left" ng-model="jumlahProduk">
+														{{monthly.table.product}}
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col text-right">
+														TRANSAKSI
+													</div>
+													<div class="col text-left" ng-model="jumlahTransaksi">
+														{{monthly.table.transaction}}
+													</div>
+												</div>
+
+												<div class="row" ng-show="setting.type === 'pro'">
+													<div class="col text-right">
+														PELANGGAN BARU
+													</div>
+													<div class="col text-left" ng-model="jumlahPelangganBaru">
+														{{monthly.table.new_customer}}
+													</div>
+												</div>
+												<div class="row">
+													<div class="col text-right">
+														TOTAL RETUR
+													</div>
+													<div class="col text-left" ng-model="jumlahRetur">
+														{{monthly.retur.product}}
+													</div>
+												</div>
+												
+											</form>
+										</div>
+										<div class="chart margin10">
+											<div class="card">
+										        <div class="item item-text-wrap">
+										            <canvas id="line" class="chart chart-line" chart-data="monthly.grafik.data" chart-labels="monthly.grafik.labels" chart-legend="false" chart-series="false" chart-click="onClick" >
+										           	</canvas> 
+										        </div>
+										    </div>
+										</div>
+									</div>
+								</div>
+	                        </ion-slide>
+
+	                    </ion-slide-box>
+	            </tab-slide-box>
+
+
+    <!-- End Content -->
+
+  </ion-content>
+</ion-view>

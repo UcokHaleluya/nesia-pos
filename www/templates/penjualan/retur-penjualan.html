@@ -1,0 +1,209 @@
+<ion-view ng-controller="returpenjualanCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+
+<ion-content>
+	<div class="head-list warna">
+		<h4 class="text-left judul-besar">RETUR</h4>
+	</div>
+
+	<div class="margin10">
+      <div class="row warna">
+        <div class="col">
+          <div class="">
+            <div class="item-custom input-group input-group-line-bottom line-find">
+              <input type="text" ng-model="temp.search" placeholder="No. Faktur"/>
+            </div>
+            <button class="btn btn-transparant" ng-click="search()">
+            	<i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div class="margin10">
+    	<ion-scroll zooming="true" direction="xy" style="max-height:170px">
+	    	<table class="table-scroll strip">
+	    		<tr>
+	    			<th>No. Fraktur</th>
+	    			<th>Pajak 1</th>
+	    			<th>Pajak 2</th>
+	    			<th>Total</th>
+	    			<th>Tanggal</th>
+	    		</tr>
+	    		<tr ng-repeat="(key, value) in lists" ng-show="lists.length" ng-click="select_item(key)" click-table>
+	    			<td>{{value.invoice}}</td>
+	    			<td ng-bind="bind_pajak(value.pajak_1)"></td>
+	    			<td ng-bind="bind_pajak(value.pajak_2)"></td>
+	    			<td>{{value.grand_total | currency : "Rp. " : 0}}</td>
+	    			<td>{{value.tanggal}}</td>
+	    		</tr>
+
+	    		<tr ng-hide="lists.length">
+	    			<td colspan="5">Data tidak ditemukan</td>
+	    		</tr>
+	    	</table>
+    	</ion-scroll>
+    </div>
+    <div class="margin10" ng-show="temp.show_prod">
+    	<table class="default border-edge">
+    		<tr>
+    			<th>#</th>
+    			<th>Code</th>
+    			<th>Nama</th>
+    			<th>Jumlah</th>
+    			<th>Harga</th>
+    			<th></th>
+    		</tr>
+    		<tr ng-repeat="(key, value) in temp.sales_item">
+    			<td>{{key + 1}}</td>
+    			<td>{{value.code}}</td>
+    			<td>{{value.name}}</td>
+    			<td>{{value.jumlah}}</td>
+    			<td>{{value.total_price| currency : "Rp. " : 0}}</td>
+    			<td>
+    				<button class="btn btn-sm btn-transparant" ng-click="prod_add(value)">
+    					<i class="fa fa-check white-stroke" style="color:green;"></i>
+    				</button>
+    			</td>
+    		</tr>
+    	</table>
+    </div>
+
+    <div class="row warna margin10">
+    	<div class="col">
+    		<p>DETAIL RETUR</p>
+    	</div>
+    </div>
+    <div class="row margin10">
+    	<div class="col">
+    		Tanggal
+    	</div>
+    	<div class="col">
+    		<input type="date" placeholder="dd-mm-yyyy" ng-model="data.tanggal" class="input-produk-detail" />
+    	</div>
+    </div>
+    <div class="margin10" ng-show="data.items.length > 0">
+    	<table class="default">
+    		<tr>
+    			<th>#</th>
+    			<th>Code</th>
+    			<th>Nama</th>
+    			<th>Jumlah</th>
+    			<th>Harga</th>
+    		</tr>
+    		<tr ng-repeat="(key, value) in data.items">
+    			<td>{{key + 1}}</td>
+    			<td>{{value.code}}</td>
+    			<td>{{value.name}}</td>
+    			<td>
+    				<input type="number" class="input-produk-detail" style="width:50px" ng-model="data.items[key].new_jumlah"/>
+    			</td>
+    			<td>{{value.total_price | currency : "Rp. " : 0}}</td>
+    		</tr>
+    	</table>
+    </div>
+
+    <div class="margin10">
+    	<div class="row">
+    		<div class="col">
+    			<button class="btn btn-default pull-right" ng-click="save()">Simpan</button>
+    		</div>
+    	</div>
+    </div>
+
+<!-- <div class="row">
+	<div class="col col-10">
+	</div>
+	<div class="col" style="padding-top: 0px !Important; padding-bottom: 0px !Important;">
+		<div class="h5 text-center">
+			<select class="text-center warna-select input-select">
+				<option value="TANGGAL">Tgl</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="2">31</option>
+			</select>
+		</div>
+	</div>
+	<div class="col" style="padding-top: 0px !Important; padding-bottom: 0px !Important;">
+		<div class="h5 text-center">
+			<select class="text-center warna-select input-select">
+				<option value="BULAN">Bln</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="2">12</option>
+			</select>
+		</div>
+	</div>
+	<div class="col" style="padding-top: 0px !Important; padding-bottom: 0px !Important;">
+		<div class="h5 text-center">
+			<select class="text-center warna-select input-select">
+				<option value="TAHUN">Thn</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+			</select>
+		</div>
+	</div>
+	<div class="col col-33">
+	</div>
+</div>
+<div class="row" style="margin: 0 !Important; padding: 0 !Important;">
+	<div class="col col-10">
+		<i class="ion-icon ion-plus" style="font-size: 2em;"></i>
+	</div>
+	<div class="col" style="padding-top: 0px !Important;">
+		<div class="h5 text-center">
+			<select class="text-center warna-select input-select">
+				<option value="NO. FAKTUR">NO. FAKTUR</option>
+				<option value="NO. FAKTUR 1">NO. FAKTUR 1</option>
+				<option value="NO. FAKTUR 2">NO. FAKTUR 2</option>
+				<option value="NO. FAKTUR 3">NO. FAKTUR 3</option>
+			</select>
+		</div>
+	</div>
+	<div class="col col-33">
+	</div>
+</div>
+<div class="row" style="margin: 0 !Important; padding: 0 !Important;">
+	<div class="col col-10">
+	</div>
+	<div class="col" style="padding-top: 0px !Important;">
+		<div class="h6 text-center">
+			<select class="text-center warna-select input-select">
+				<option value="ID, NAMA JENIS">ID, NAMA JENIS</option>
+				<option value="10001 NASI GORENG SEAFOOD">10001 NASI GORENG SEAFOOD</option>
+				<option value="10002 NASI GORENG AYAM">10002 NASI GORENG AYAM</option>
+				<option value="10003 NASI GORENG TELOR">10003 NASI GORENG TELOR</option>
+			</select>
+		</div>
+	</div>
+	<div class="col text-right col-33" style="padding-top: 15px;">
+		<span>400.000</span>
+		<i class="fa fa-times white-stroke" style="color:red;"></i>
+	</div>
+</div>
+<div class="row even tebal">
+	<div class="col col-10"></div>
+	<div class="col col-60 text-right">
+		<span>TOTAL RETUR</span>
+	</div>
+	<div class="col text-right">
+		<span>400.000</span>
+	</div>
+</div>
+<div class="row odd tebal">
+	<div class="col col-10"></div>
+	<div class="col col-60 text-right">
+		<span>GRAND TOTAL SETELAN RETUR</span>
+	</div>
+	<div class="col text-right">
+		<span>0</span>
+	</div>
+</div>
+
+<div class="col" style="margin-top: 25px !Important;">
+	<a ng-click="simpanRetur()" class="btn btn-default">Simpan</a>
+</div> -->
+
+</ion-content>
+</ion-view>

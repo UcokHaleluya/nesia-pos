@@ -1,0 +1,99 @@
+<ion-view ng-controller="produkBaruGudangCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>"> 
+<ion-content>
+  <div class="head-list warna">
+   <div>
+      <h4 class="text-left judul-besar"> TAMBAH PRODUK
+        <div class="icon-kanan">
+          <a ng-click="saveProduct()"><i class="fa fa-floppy-o"></i></a>
+        </div>
+      </h4>
+   </div>   
+  </div>
+  <div class="row">
+    <div class="padding margin10">
+      <h5>GUDANG : {{namaGUdang}}</h5>
+    </div>
+  </div>
+  <div style="width: 100%;" class="row odd" ng-hide="listProduct.length > 0" align="center">
+    <h5 style="width: 100%;" class="padding warna">Tidak ada produk yang bisa ditambahkan</h5>
+  </div>
+  <div ng-show="listProduct.length > 0">
+    <div class="row">
+    <div class="col col-33 list list-inset">
+      <select class="text-center warna-select input-select line-find" ng-options="w.parent_category as w.parent_category for w in listProduct | unique : 'parent_category'" ng-model="par.kategori"></select>
+    </div>
+    <div class="col list list-inset">
+       <div class="item-custom input-group input-group-line-bottom line-find">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input ng-model="cari" type="text" placeholder="Cari">
+       </div>
+        <a href="">
+        <i class="fa fa-camera-retro"></i>
+       </a>  
+    </div>
+  </div>
+  <div class="margin10">
+  <ion-scroll zooming="false" direction="x" style="">
+    <div class="prod-list default">
+      <div class="prod-img img-radio" ng-repeat="item in listProduct | filter : { parent_category : par.kategori, name : cari}">
+        <ion-radio ng-model="par.selected_product" ng-value="{{item.id}}" ng-click="changeId(item.code, item.id, item)">
+            <div class="img">
+              <img src="{{item.image}}" ng-show="item.image"/>
+              <img src="img/ionic.png" ng-show="!item.image || item.image == null || item.image == ''"/>
+            </div>
+            <label>{{item.name}}</label>
+        </ion-radio>        
+      </div>      
+      <!-- </ion-list> -->
+    </div>
+  </ion-scroll>
+  </div>
+   <div class="margin10 form-horizontal">
+      <div class="row">
+        <div class="col col-33">
+          <label>Kode produk </label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" disabled ng-model="aa" placeholder="Kode produk" type="text"></input>
+          <input style="display:none;" class="input-produk-detail" disabled ng-model="bb" type="text"></input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-33">
+          <label>Supplier</label>
+        </div>
+        <div class="col">
+          <select class="text-center warna-select input-select" ng-options="x.user_id as x.name for x in listSupplier" ng-model="par.suplier"=></select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-33">
+          <label>Satuan</label>
+        </div>
+        <div class="col col-33">
+          <select class="text-center warna-select input-select" ng-options="z.id_unit as z.unit for z in satuan" ng-model="par.units"></select>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col col-33">
+            <label>Jumlah Stock</label>
+          </div>
+        <div class="col col-33">        
+          <input type="number" ng-model="par.qty" class="input-produk-detail" placeholder="Stok" />
+        </div>
+      </div>
+      </div>
+        <div class="row">
+          <div class="col col-33">
+            <label>Harga</label>
+          </div>
+        <div class="col">        
+          <input type="number" ng-model="par.price" class="input-produk-detail" placeholder="Harga" />
+        </div>
+      </div>
+      <div class="row">
+        &nbsp;
+      </div>
+  </div>
+</ion-content>
+</ion-view>

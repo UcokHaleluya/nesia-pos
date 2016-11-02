@@ -1,0 +1,46 @@
+<ion-view ng-controller="produkRiwayatCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+
+  <ion-content>
+
+      <div class="head-list warna">
+        <h4 class="text-left judul-besar">RIWAYAT PRODUK</h4>
+
+      </div>
+    <div class="head-list">
+      <h3 class="text-center subjudul-besar" style="margin: 20px;">{{categoryproduk}}</h3>
+    </div>
+      
+
+      <div class="list list-inset">
+          <div class="row">
+            <div class="col">
+              <div class="item-custom input-group input-group-line-bottom">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input ng-model="search" type="text" placeholder="Cari">
+              </div>
+            </div>
+          </div> 
+      </div>  
+
+
+  
+
+    <div style="margin-top: 10px; font-size: 14px;">
+      <div class="row warna tebal" style="text-align: left !important;">
+        <div class="col">DIUBAH OLEH</div>
+        <div class="col">DIUBAH PADA</div>
+         <div class="col">Jenis Produk</div>
+        <div class="col">KET</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px; font-size: 13px;" ng-repeat="x in dataList.data | filter : search">
+      <div class="row odd">
+        <div class="col">{{x.user_role}}</div>
+        <div class="col">{{x.time}}</div>
+         <div class="col">{{x.product_name}}</div>
+        <div class="col">{{x.description}}</div>
+      </div>
+
+</ion-view>

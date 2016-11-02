@@ -1,0 +1,69 @@
+	body{
+width:80mm;
+font-family: arial;
+color: #000000;
+font-size: 12px;
+}
+.header{
+text-align:center;
+}
+.caption{
+text-transform: uppercase;
+font-weight: bold;
+}
+.logo{
+position:absolute;width:80px;
+}
+.left{
+text-align: left;
+}
+.right{
+text-align: right;
+}
+.center{
+text-align: center;
+}
+.solid{
+border-bottom-style: solid;
+}
+p.left{
+text-align: left;
+}
+p {
+font-size: 12px;
+}
+.table-pelanggan{
+border: 0;
+width:100%;
+text-align:center;
+font-size: 12px;
+}
+.table-grandtotal{
+font-size: 12px;
+width:100%; 
+text-align:left;
+}
+
+.table-produk{
+width:100%;
+text-align:left;
+font-size: 12px;
+}
+.table-antar{
+	font-size: 12px;
+}
+.diskon{
+color: #FF0000;
+}
+.grandtotal{
+color:#00FF00;
+}
+.table-antar{
+	width:100%;
+text-align:left;
+font-size: 12px;
+border: 0;
+}
+.table-note{
+width: 100%;
+}

@@ -1,0 +1,107 @@
+<ion-view ng-controller="produkCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <style type="text/css">
+      .popup-container.active .popup {
+      width: 80% !important;
+      }
+   </style>
+   <ion-content id="popKtg">
+      <div class="head-list warna">
+         <h4 class="text-left judul-besar">PRODUK
+         <div class="icon-kanan" style="margin-top :-8px;">
+            <button class="btn btn-md btn-transparant" ui-sref="pos.produk-baru">
+              <img src="img/addProd.png">
+            </button>
+            <button class="btn btn-md btn-transparant" ng-click="tambahKategori()">
+              <img src="img/tambahkategori.png">
+            </button>
+            <button class="btn btn-md btn-transparant" ng-click="editKategori()">
+              <img src="img/editkategori.png">
+            </button>
+         </div>
+         </h4>
+      </div>
+      <div class="list list-inset"> 
+         <div class="row">
+            <div class="col">
+               <div class="item-custom input-group input-group-line-bottom line-find">
+                  <i class="icon ion-search placeholder-icon"></i>
+                  <input ng-model="param.cari" type="text" class="" placeholder="Cari">
+               </div>
+            <button class="btn btn-md btn-transparant"  ng-click="scanBarcode()">
+               <i class="fa fa-camera-retro left icon"></i>
+            </button>
+            </div>
+         </div>
+      </div>
+      <tab-slide-box tab="0">
+         <div class="tsb-icons warna" style="margin-top: 10px;  font-size: 13px;">
+            <div class="tsb-ic-wrp">
+               <ion-scroll direction="x" class="tsb-hscroll" style="height: 35px; width: 100%;">
+                  <div class="row text-center">
+                     <a ng-click=""> SEMUA KATEGORI </a>
+                     <div ng-repeat="kategori in listKategori">
+                        <a> {{kategori.name}} </a>
+                     </div>
+                  </div>
+               </ion-scroll>
+            </div>
+         </div>
+         <!-- Produk List  semua kategori-->
+         <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+               <div class="detail-kategori" style="margin-top: 10px; font-size: 13px;">
+                  <div class="header-kategori">
+                     <div class="row even tebal" style="margin-top: 10px;">
+                        <div class="col">JENIS ID</div>
+                        <div class="col">KATEGORI</div>
+                        <div class="col">PRODUK</div>
+                        <div class="col">JENIS</div>
+                     </div>
+                  </div>
+                  <ion-scroll zooming="true" direction="y" style="height: 58vh">
+                  <div style=" font-size: 13px;" class="konten-kategori" ng-repeat="lists in listProduk | filter: param.cari">
+                     <a href="#/pos/produk/produk-detail/{{lists.id}}/{{lists.category_id}}">
+                        <div class="row odd">
+                           <div class="col"> {{lists.code}}</div>
+                           <div class="col"> {{lists.parent_category_name}}</div>
+                           <div class="col"> {{lists.category_name}}</div>
+                           <div class="col"> {{lists.name}}</div>
+                        </div>
+                     </a>
+                  </div>
+<!--             <button class="btn btn-md btn-transparant"  ng-click="scanBarcode()">
+               <p>tampil lebih banyak</p>
+            </button> -->
+                  </ion-scroll>
+               </div>
+            </ion-slide>
+            <ion-slide ng-repeat="kategori in listKategori" on-finish-render>
+               <div class="detail-kategori" style="margin-top: 10px; font-size: 13px;">
+                  <div class="header-kategori">
+                     <div class="row even tebal" style="margin-top: 10px;">
+                        <div class="col">JENIS ID</div>
+                        <div class="col">KATEGORI</div>
+                        <div class="col">PRODUK</div>
+                        <div class="col">JENIS</div>
+                     </div>
+                  </div>
+                  <ion-scroll zooming="true" direction="y" style="height: 58vh">
+                  <div style=" font-size: 13px;" class="konten-kategori" ng-repeat="lists in listProduk | filter: param.cari" ng-if="lists.parent_category_name == kategori.name">
+                     <a href="#/pos/produk/produk-detail/{{lists.id}}/{{lists.category_id}}">
+                        <div class="row odd" ng-init="lists">
+                           <div class="col"> {{lists.code}}</div>
+                           <div class="col"> {{lists.parent_category_name}}</div>
+                           <div class="col"> {{lists.category_name}}</div>
+                           <div class="col"> {{lists.name}}</div>
+                        </div>
+                     </a>
+                  </div>
+                 </ion-scroll>
+               </div>
+            </ion-slide>
+     
+            <!-- Produk List berdasarkan kategori -->
+         </ion-slide-box>
+      </tab-slide-box>
+   </ion-content>
+</ion-view>

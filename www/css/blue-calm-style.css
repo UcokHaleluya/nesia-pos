@@ -1,0 +1,304 @@
+body.blue-calm{
+	background: #fff;
+}
+
+.blue-calm .bar.bar-calm{
+	background-color: #0a9dc7;
+}
+
+.blue-calm .warna {
+	background-color: #0a9dc7 !important;
+	border-color: #0a9dc7 !important;
+}
+
+.blue-calm .pane, .blue-calm .view {
+	background-color: #ffffff;
+	color: #000;
+}
+
+.blue-calm .btn-disabled {
+
+	background-color: #ffffff !important;
+}
+
+.blue-calm .tabbed-slidebox .slider-slide {
+	background-color: #ffffff ;
+	color: #000;
+}
+
+.blue-calm .judul-sub-detail {
+	background-color: #0a9dc7;
+	border: none;
+}
+
+.blue-calm.button.button-positive{
+	background-color: #0a9dc7;
+}
+
+.blue-calm .text-right{
+	color: #000; font-weight: bold;
+}
+
+.blue-calm input[type="text"].tanggal{
+	color: #000;
+}
+
+
+.blue-calm .card, .blue-calm .list-inset{
+	background-color: #0a9dc7 !important;
+}
+
+.blue-calm .item-custom {
+	background-color: #ffffff  !important;
+}
+
+.blue-calm .even{
+	background-color: #0a9dc7 !important;
+}
+
+
+.blue-calm .odd {
+	background-color: #dedede !important;
+	color: #000 !important;
+	font-weight: normal;
+}
+
+.blue-calm .form-horizontal{
+	color: #000 !important;
+}
+
+
+.blue-calm .btn-default{
+	background-color: #0a9dc7;
+}
+
+.blue-calm .popup-head {
+	background-color: #0a9dc7;
+}
+
+.blue-calm .button-positive{
+	background-color: #0a9dc7 !important;
+	color: #fff !important;
+}
+
+.blue-calm .popup{
+	background-color: #ffffff !important;
+	color: #000 !important;
+}
+
+.blue-calm .button {
+	background-color: #bfb4b4 ;
+	color: #fff;
+}
+
+.blue-calm .input-select{
+	border: 1px solid black !important;
+	color: black !important;
+}
+.blue-calm table tr th{
+	background-color: #0a9dc7 !important;
+	color: #fff !important;
+}
+
+.blue-calm table tr{
+	background-color: #dedede  !important;
+	color: #000;
+}
+
+.blue-calm .input-produk-detail {
+	background-color: #ffffff !important;
+	border: 1px solid black !important;
+	color: black !important;
+}
+
+.blue-calm .tabbed-slidebox .tsb-icons a {
+	color: #ffffff;
+}
+
+.blue-calm	fieldset.input input[type="submit"] {
+	background: #0a9dc7 ;
+	color: #fff;
+}
+
+.blue-calm .input-group{
+	background-color: #ffffff !important;
+	border: 1px solid black !important;
+	color: #000  !important;
+}
+
+.blue-calm .input-group-addon{
+	color: #000 !important;
+}
+
+.blue-calm .input-login{
+	color: #000 !important;
+}
+
+.blue-calm .input-group input{
+	color: #000 !important;
+	font-weight: normal;
+}
+
+.blue-calm .bantuan{
+	color: #000;
+}
+.blue-calm .help{
+	color: #000 !important;
+}
+
+.blue-calm .forgot-password{
+	color: #000;
+}
+
+.blue-calm .input-daftar{
+	background-color: #ffffff !important;
+	border: 1px solid black !important;
+	color: #000  !important;
+}
+
+.blue-calm .term-condition{
+	color: #000;
+}
+
+.blue-calm .register-gender{
+	color :#000;
+}
+
+.blue-calm .already-register{
+	color :#000;
+}
+
+.blue-calm .textproduct{
+	color :#000;
+}
+
+.blue-calm .subjudul-besar {
+	color: #fff !important;
+}
+
+.blue-calm .icon-delete-produk{
+	color: #000;
+}
+
+.blue-calm .input-kontak{
+	border: 1px solid black !important;
+	color: #000 !important;
+}
+
+.blue-calm .icon-setting{
+	color: #000 !important;
+}
+
+.blue-calm .textdetail-setting{
+	color: #000;
+}
+.blue-calm .preference-setting{
+	color: #000;
+}
+
+.blue-calm .default .item,.blue-calm .default .item-complex .item-content,.blue-calm .default .item-radio .item-content{
+	color: #000;
+}
+
+.blue-calm .input-konversi{
+	border: 1px solid black !important;
+	color: #000 !important;
+	font-weight: normal;
+}
+
+.blue-calm .comingsoon{
+	color: #000 !important;
+}
+
+.blue-calm .inputpenjualan{
+	background-color: #0a9dc7 !important;
+	color: #fff !important;
+}
+
+.blue-calm .tabs-striped .tabs{
+	background-color: #0a9dc7 !important;
+	color: #fff !important;
+}
+
+.blue-calm .tab-item {
+	color: none;
+}
+
+
+.blue-calm .input-total{
+	background : none !important;
+	color: #000 !important;
+}
+
+.blue-calm .text-penjualan{
+	font-weight: bold !important;
+}
+
+.blue-calm .add-konversi{
+	 color:#000; 
+}
+
+.blue-calm .list-konversi{
+	font-weight: bold;
+	color: #000;
+}
+
+.blue-calm .sub-list-konversi{
+	font-weight: bold;
+	color: #000;
+}
+
+.blue-calm .records-password{
+	color: #000;
+}
+
+.blue-calm .input-namakontak{
+	color: #fff;
+	font-weight: normal;
+}
+
+.blue-calm .checkbox input:checked:before,
+.blue-calm .checkbox input:checked + .checkbox-icon:before {
+    background: #0a9dc7;
+    border-color: #0a9dc7;
+}
+.blue-calm .line-find{
+	border: 0px !important;
+}
+
+.blue-calm select[disabled]{
+	border: 1px solid black !important;
+}
+.blue-calm .input-gudang{
+	border: 1px solid black !important;
+	color: #000 !important;
+}
+.blue-calm .listkonversi{
+	color: #000;
+}
+.blue-calm .text-reportandgraph{
+	color: #000;
+}
+.blue-calm .list-laporan{
+	color: #000;
+}
+.blue-calm .tentang-splash{
+	color: #000 !important;
+}
+
+.blue-calm .title-business{
+	color: #000 !important
+}
+
+.blue-calm .title-bank{
+	color: #000 !important;
+	font-weight: normal;
+}
+
+.blue-calm .transparant-textbox{
+	    background-color: #ffffff !important;
+	    border: 1px solid #000 !important;
+}
+.tax-percent{
+	color: #000;
+}

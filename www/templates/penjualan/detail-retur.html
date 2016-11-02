@@ -1,0 +1,56 @@
+<ion-view ng-controller="detailReturCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+<ion-content>
+<div class="head-list warna" style="padding: 0.02px;">
+	<h4 class="text-left judul-besar">Detail Retur</h4>
+</div>
+
+<div class="margin10 form-horizontal">
+	<div class="row">
+		<div class="col col-33">
+			<label>Tanggal </label>
+		</div>
+		<div class="col"  ng-init="mySwitch=true">
+			<input class="input-produk-detail" ng-model="data.tanggal" type="date" ng-disabled="true"></input>
+		</div>
+	</div>
+</div>
+      <div class="row">
+        <div class="col col-33">
+          <label>Faktur Lama </label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" ng-model="data.old_invoice" ng-disabled="true"></input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-33">
+          <label>Faktur Baru </label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" ng-model="data.invoice" ng-disabled="true"></input>
+        </div>
+      </div>
+
+
+      <div class="margin10">
+      <ion-scroll zooming="true" direction="x">
+        <table class="table-scroll">
+          <tr>
+            <th>Kode</th>
+            <th>Nama</th>
+            <th>Jumlah</th>
+            <th>Satuan</th>
+            <th>Total</th>
+          </tr>
+          <tr ng-repeat="(key, detail) in data.detail">
+            <td>{{(detail.code == "") ? "--" : detail.code}}</td>
+            <td>{{detail.name}}</td>
+            <td>{{detail.jumlah}}</td>
+            <td>{{detail.unit}}</td>
+            <td>{{detail.total_price | currency : "Rp. " : 0}}</td>
+          </tr>
+        </table>
+      </ion-scroll>
+    </div>
+</ion-content>
+</ion-view>

@@ -1,0 +1,256 @@
+<ion-view ng-controller="kontakPelangganCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+      <!-- Content -->
+      <div class="head-list warna">
+         <h4 class="text-left judul-besar">
+            {{customer.username}}
+            <div class="icon-kanan">
+               <button class="btn btn-md btn-transparant" ng-click="edit()">
+               <i class="fa fa-pencil" ng-style="iconEdit"></i></a>
+               </button>
+               <button class="btn btn-md btn-transparant" ng-click="save()">
+               <i class="fa fa-floppy-o" ng-style="iconSave"></i></a>
+               </button>
+               <button class="btn btn-md btn-transparant" ng-click="hapus()">
+               <i class="fa fa-trash" ng-style="iconDelete"></i></a>
+               </button>
+            </div>
+         </h4>
+      </div>
+      <div class="container" style="margin: 10px 0 10px 0 !important; padding-right:0px !important;">
+         <div class="foto">
+            <button class="btn-disabled" ng-click="ambilFotoPelanggan()" ng-disabled="disabled">
+            <img src="{{customer.picture}}" id="fotoPelanggan" ng-model="customer.picture">
+            </button>
+         </div>
+         <div class="kanan-foto">
+            ID : <i class="ion-at"></i>
+            <span>{{customer.user_id | numberFixedLen:3}}</span>
+            <br/>
+            <i class="ion-android-calendar"></i> 
+            <span>{{customer.created_at | date: "dd/MMM/yy"}}</span>
+            <span>
+            <!--             <img src="img/silver.png" style="height: 70px; margin-left: 25px; margin-top: -15px;">
+               </span> -->
+            <!--             <div class="warna margin10" style="margin-left: 35%;">
+               <span model="badge">
+               <img src="img/hijau.png" style="width: 30px; height: 30px;">
+               </span>
+               <span style="color:green; font-weight: bold;" class="white-stroke">100.000</span>
+               <span model="badge">
+               <img src="img/merah.png" style="width: 30px; height: 30px;">
+               </span>
+               <span style="color:red; font-weight: bold;" class="white-stroke">100.000</span>
+               </div> -->
+         </div>
+      </div>
+      <tab-slide-box tab="0">
+         <div class="tsb-icons warna">
+            <div class="tsb-ic-wrp">
+               <ion-scroll direction="x" class="tsb-hscroll" style="height: 35px; width:100%; text-align:center;">
+                  <div class="row text-center" >
+                     <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="" style="padding: 5px;">DETAIL</a>
+                     </div>
+                     <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="">RIWAYAT</a>
+                     </div>
+                     <!-- <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="">KATA SANDI</a>
+                        </div> -->
+                     <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="">KELAS</a>
+                     </div>
+                  </div>
+            </div>
+            </ion-scroll>
+         </div>
+         </div>
+         <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+               <ion-scroll direction="y" style="height:100%">
+                  <div class="container">
+                     <div id="detail">
+                        <form>
+                           <!--   <p style="color:#fff">{{customer.birth_date}}</p> -->
+                           <i class="icon-text ion-person icon-setting"></i>
+                           <input class="input-kontak" type="text" ng-model="customer.name" required placeholder="Nama pelanggan" ng-disabled="disabled"/>
+                           <i class="icon-text ion-man icon-setting"></i>
+                           <div class="h5 text-center" style="margin-left: 20px; width: 90%;">
+                              <select class="text-center warna-select input-select" ng-disabled="disabled" ng-options="sales.name for sales in dataSalesmen track by sales.user_id" ng-model="customer.salesman"></select>
+                           </div>
+                           <div style="clear: both;"></div>
+                           <i class="icon-text ion-calendar icon-setting" style="margin-top: 15px !important;"></i>
+                           <input id="tgl_lahir" class="input-kontak" type="date" ng-model="customer.birth_date" required ng-disabled="disabled" placeholder="Tanggal lahir" min="1900-01-01"/>                           
+                           <i class="icon-text ion-iphone icon-setting"></i>
+                           <input class="input-kontak" type="tel" ng-model="customer.mobile" required placeholder="Nomor handphone pelanggan" ng-disabled="disabled"/>
+                           <i class="icon-text ion-email icon-setting"></i>
+                           <input class="input-kontak" type="email" ng-model="customer.email" required placeholder="Email pelanggan" ng-disabled="disabled"/>
+                           <i class="icon-text ion-male icon-setting"></i>
+                           <div class="row" style="color: white; width: 95%">
+                              <div class="col">
+                                 <label class="register-gender">
+                                 <input type="radio" name="jenisKelamin" ng-disabled="disabled" ng-model="customer.gender" value="1">
+                                 Laki-laki
+                                 </label>
+                              </div>
+                              <div class="col">
+                                 <label class="register-gender">
+                                 <input type="radio" name="jenisKelamin" ng-disabled="disabled" ng-model="customer.gender" value="0">
+                                 Perempuan
+                                 </label>
+                              </div>
+                           </div>
+                           <i class="icon-text ion-ios-home-outline posisi-icon icon-setting"></i>
+                           <input class="input-kontak" type="text" ng-model="customer.address" required placeholder="Alamat pelanggan" ng-disabled="disabled"/>
+                        </form>
+                     </div>
+                     <!-- <div id="detail-bank">
+                        <form>
+                           <p class="judul-sub-detail">DETAIL BANK</p>
+                        
+                           <div class="row">
+                              <div class="col">
+                                 <p class="margin-kiri20">NAMA BANK</p>
+                                 <input class="input-kontak" type="text" ng-model="customer.banks[0].bank" required placeholder="Bank pelanggan" ng-disabled="disabled"/>
+                              </div>
+                              <div class="col">
+                                 <p class="margin-kiri20">CABANG</p>
+                                 <input class="input-kontak" type="text" ng-model="customer.banks[0].branch" required placeholder="Cabang bank pelanggan" ng-disabled="disabled" style="width: 80%;"/>
+                              </div>
+                           </div>
+                        
+                           <p class="margin-kiri20">NAMA AKUN</p>
+                           <input class="input-kontak" type="text" ng-model="customer.banks[0].account_name" required placeholder="Nama akun bank pelanggan" ng-disabled="disabled"/>
+                        
+                           <p class="margin-kiri20">NOMOR AKUN</p>
+                           <input class="input-kontak" type="tel" ng-model="customer.banks[0].account_no" required placeholder="Nomor rekening bank pelanggan" ng-disabled="disabled"/>
+                        
+                           <textarea class="input-kontak" ng-model="customer.banks[0].remarks" placeholder="Catatan pelanggan" ng-disabled="disabled" style="border-radius: 0;"></textarea>
+                        
+                        </form>
+                        </div> -->
+                  </div>
+               </ion-scroll>
+            </ion-slide>
+            <ion-slide>
+               <div class="table-bordered">
+                  <ion-scroll zooming="true" direction="xy">
+                     <table class="table-scroll strip">
+                        <tr>
+                           <th>Tanggal</th>
+                           <th>No.Faktur</th>
+                           <th>Harga</th>
+                           <th>Status</th>
+                        </tr>
+                        <tr ng-repeat="item in histories">
+                           <td>{{item.tanggal}}</td>
+                           <td>{{item.invoice}}</td>
+                           <td>{{item.grand_total | currency : "" : 0 }}</td>
+                           <td>{{item.payment_type}}</td>
+                        </tr>
+                        <tr ng-hide="histories.length">
+                           <td colspan="4">Data tidak ditemukan</td>
+                        </tr>
+                     </table>
+                  </ion-scroll>
+               </div>
+            </ion-slide>
+            <!-- <ion-slide>
+               <ion-scroll direction="y" style="height: 100%; padding: 10px;">
+               <div id="detail">
+               
+               <form>
+               
+                  <i class="icon-text ion-ios-locked"></i>
+                  <input class="input-kontak" type="password" name="password" ng-model="passwordLama" required placeholder="Kata sandi lama" ng-disabled="disabled"/>
+               
+                  <i class="icon-text ion-ios-locked-outline"></i>
+                  <input class="input-kontak" type="password" name="password"ng-model="passwordBaru" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onchange="form.password-confirmation.pattern = this.value;"
+                                          title="Kata Sandi minimal 8 karakter atau lebih (mengandung minimal 1 angka, 1 huruf besar dan 1 huruf kecil)" required placeholder="Kata sandi baru" ng-disabled="disabled"/>
+               
+                  <i class="icon-text ion-ios-locked-outline"></i>
+                  <input class="input-kontak" type="password" name="password-confirmation" ng-model="passwordBaruKonfirmasi" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Kata Sandi harus sama dengan di atas" required placeholder="Konfirmasi kata sandi baru" ng-disabled="disabled"/>
+               
+               </form>
+               </div>
+               </ion-scroll>
+                  </ion-slide> -->
+            <ion-slide>
+               <ion-scroll direction="y" style="height: 100%;">
+                  <h4 class="comingsoon">Belum tersedia</h4>
+                  <!-- <div class="row margin10">
+                     <div class="col col-50">
+                        <label class="tingkatpelanggan">
+                        <input type="radio" class="margin10" name="kelas" ng-model="class[1].is_current" ng-disabled="disabled" value="1">
+                        <img  src="img/silver.png" style="width: 40px; height: 40px;">SILVER
+                        </label>
+                     </div>
+                     <div class="col">
+                        <input class="input-kelas" type="number" min="0" max="100" ng-model="class[1].value" ng-disabled="disabled">
+                     </div>
+                     <div class="col">
+                        <span class="color4" style=" text-align:left !important; float: left;">%</span>
+                     </div>
+                     <div class="col">
+                     </div>
+                     <br/>
+                     </div>
+                     <div class="row">
+                     <div class="col col-50">
+                        <label class="tingkatpelanggan">
+                        <input type="radio" class="margin10" name="kelas" ng-model="class[2].is_current" value="1" ng-disabled="disabled">
+                        <img  src="img/gold.png" style="width: 40px; height: 40px;">GOLD
+                        </label>
+                     </div>
+                     <div class="col">
+                        <input class="input-kelas" type="number" min="0" max="100" ng-model="class[2].value" ng-disabled="disabled">
+                     </div>
+                     <div class="col">
+                        <span class="color4" style=" text-align:left !important; float: left;">%</span>
+                     </div>
+                     <div class="col">
+                     </div>
+                     <br/>
+                     </div>
+                     <div class="row">
+                     <div class="col col-50">
+                        <label class="tingkatpelanggan">
+                        <input type="radio" class="margin10" name="kelas" ng-model="class[3].is_current" value="1" ng-disabled="disabled">
+                        <img  src="img/platinum.png" style="width: 40px; height: 40px;">PLATINUM
+                        </label>
+                     </div>
+                     <div class="col ">
+                        <input class="input-kelas" type="number" min="0" max="100" ng-model="class[3].value" ng-disabled="disabled">
+                     </div>
+                     <div class="col">
+                        <span class="color4" style=" text-align:left !important; float: left;">%</span>
+                     </div>
+                     <div class="col">
+                     </div>
+                     <br/>
+                     </div>
+                     <div class="row">
+                     <div class="col col-50">
+                        <label class="tingkatpelanggan">
+                        <input type="radio" class="margin10" name="kelas" ng-model="class[4].is_current" value="1" ng-disabled="disabled">
+                        <img  src="img/black.png" style="width: 40px; height: 40px;"></i>BLACK
+                        </label>
+                     </div>
+                     <div class="col">
+                        <input class="input-kelas" type="number" min="0" max="100" ng-model="class[4].value" ng-disabled="disabled">
+                     </div>
+                     <div class="col">
+                        <span class="color4" style=" text-align:left !important; float: left;">%</span>
+                     </div>
+                     <div class="col">
+                     </div>
+                     <br/>
+                     </div> -->
+               </ion-scroll>
+            </ion-slide>
+         </ion-slide-box>
+      </tab-slide-box>
+      <!-- End Content -->
+   </ion-content>
+</ion-view>

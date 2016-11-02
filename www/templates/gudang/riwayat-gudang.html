@@ -1,0 +1,60 @@
+<ion-view ng-controller="riwayatTransferCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+    <ion-content>
+
+           <div class="head-list warna">
+      <h4 class="text-left judul-besar">RIWAYAT GUDANG</h4>
+    </div>
+      	<div class="row">
+	       <div class="col col-33">
+	         <label>Dari </label>
+	       </div>
+	       <div class="col">
+	         <input ng-model="tgl.awal" class="input-produk-detail" type="date">
+	       </div>
+	    </div>
+
+      <div class="row">
+        <div class="col col-33">
+          <label>Sampai </label>
+        </div>
+        <div class="col">
+          <input ng-model="tgl.akhir" class="input-produk-detail" type="date">
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col col-33">&nbsp;</div>
+          <div class="col">
+                <button class="btn btn-default pull-right" ng-click="firstLoad()">Tampilkan</button>
+          </div>
+      </div>
+
+	    <div class="row">
+          <div class="col list list-inset">
+             <div class="item-custom input-group input-group-line-bottom line-find">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input ng-model="cari" type="text" placeholder="Cari">
+             </div>             
+          </div>
+       </div>
+	    <div class="row">
+          <div class="margin10" style="width: 100%; font-size: 3.5vw;">
+             <div class="row even tebal header-kategori">
+                <div class="col">JENIS PRODUK</div>
+                <div class="col">WAKTU</div>
+                <div class="col">STATUS</div>
+                <div class="col">KET</div>
+             </div>
+             <div class="row odd" ng-repeat="list in prodHistory.data | filter: {product_name : cari}">
+                <div class="col">{{list.product_name}}</div>
+                <div class="col">{{list.date | date:'dd/MM/yy'}} ({{list.date | date:'HH:mm'}})</div>
+                <div class="col">{{list.type}}</div>
+                <div class="col">{{list.description}}</div>
+             </div> 
+              <div class="row odd" ng-hide="prodHistory.data.length">
+                <div class="col">Data tidak ditemukan</div>
+             </div>                      
+          </div>
+       </div>
+    </ion-content>
+</ion-view>

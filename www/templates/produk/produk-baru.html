@@ -1,0 +1,118 @@
+<ion-view ng-controller="produkBaruCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+<ion-content >
+<div class="head-list"> 
+    <h4 class="subjudul-besar warna">Kategori
+      <div class="icon-kanan">
+      <button class="btn btn-md btn-transparant" ng-click="tambahKategori()">
+              <img src="img/tambahkategori.png">
+      </button>
+      <button class="btn btn-md btn-transparant" ng-click="editKategori()">
+        <img src="img/editkategori.png">
+      </button>
+      </div>
+    </h4>
+</div>
+<div> 
+  <div class="row" style="padding: 0 !important;">
+    <div class="col" style="padding: 5px !important;">
+      <div class="row">
+        <select style="margin-top: 5%; margin-right: 15px; margin-left: 15px; font-size: small;" ng-change="loadProd()" ng-model="param.kategori" class="text-center warna-select input-select" id="kategori">
+          <option ng-model="param.kategori" value="" disabled>Pilih Kategori</option>
+          <option ng-model="param.kategori" ng-repeat="x in ctglist.data" value="{{x.id}}">{{x.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col" style="padding: 0 !important;">
+      <div id="gambar-besar">
+        <img class="gambar-produk" src="img/img_icon.png" width="100%">
+      </div>
+      <div id="produk-id" style="margin: 7%;">
+        <div class="h5 text-center" style="margin: 0; float:">            
+        </div>
+      </div>
+    </div> 
+  </div>
+</div> 
+<div class="warna" style="margin-top: 10px;">
+  <div class="row">
+    <div class="col">
+      <select class="text-center warna-select input-select" ng-model="param.prod" style="font-size: small;">
+        <option ng-model="param.prod" disabled="disabled" value="">Nama Produk</option>
+        <option ng-model="param.prod" ng-repeat="tmp in listProduk.subcategories" value="{{tmp.id}}">{{tmp.name}}</option>
+      </select>
+    </div>
+
+    <div class="col" style="font-size:18px">
+      <button class="btn btn-md btn-transparant" ng-click="prodSave()">
+        <img src="img/tambahproduk.png">
+      </button>      
+      <button class="btn btn-md btn-transparant" ng-click="simpanProduk()">
+       <i class="fa fa-floppy-o"></i>
+     </button>
+   </div>
+ </div>
+</div>
+</div>
+<ion-scroll direction="y" style="height: 100%;">
+<div class="product-detail">
+  <div class="row">
+    <div class="col product-image" ng-repeat="(key, image) in images">
+      <a ng-click="showOpen({{key}})">
+        <img src="{{image.image}}" height="auto" >
+      </a>
+    </div>
+  </div>      
+  <div class="row">
+    <div class="col">
+      <label class="textproduct" style="float:left;">NAMA &nbsp;JENIS</label>
+      <input ng-model="param.nama" type="text" class="input-produk-detail" placeholder="Nama Jenis Produk" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label class="textproduct">METODE STOK</label>
+      <div class="h5 text-center" style="margin: 0;">
+        <select ng-model="param.metodestok" class="text-center warna-select input-select" ng-options="c for c in orderOptions" ng-disabled="disableMetode">
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <label class="textproduct">TANGGAL PUBLIKASI</label>
+      <input type="date" ng-model="param.tanggalPublish" value="{{produklist.publish_date}}" class="input-produk-detail"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label class="textproduct">SATUAN</label>   
+      <div class="h5 text-center" style="margin: 0; padding: 0;">
+        <select class="text-center warna-select input-select" ng-model="param.satuan" ng-options="u as u.unit for u in units" ng-change="unitChange()">
+          <option value="" disabled>Pilih Satuan</option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <label class="textproduct">DISKON</label>
+      <input ng-model="param.diskon" type="number" class="input-produk-detail" style="height: 3.1em;font-size: 12px !important; width: 70px!important;"/>
+      <p style="margin-left: 75px;margin-top: -30px;font-size: 18px;">%</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label style="float:left;" class="textproduct">HARGA JUAL</label>
+      <div class="row" ng-repeat="(key, value) in selectedUnits">
+        <div class="col col-25">{{value.unit}}</div>
+        <div class="col">
+          <input ng-model="param.productUnitPrice[key]" style="height: 3.1em;font-size: 12px !important;" type="text" class="input-produk-detail" pattern="[0-9]+([\.,][0-9]+)*" format/>
+        </div>
+      </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col" style="margin: 2px;">
+      <textarea  class="input-produk-detail" ng-model="param.description" placeholder="Deskripsi Produk" style="height: 100px; font-size: 14px !important;"></textarea>
+    </div>
+  </div>
+</div>
+</ion-scroll>
+</ion-content>
+</ion-view>

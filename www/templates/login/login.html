@@ -1,0 +1,80 @@
+<ion-view ng-controller="loginCtrl" title="Login">
+<ion-content>
+
+<!-- Content -->
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+
+
+            <div class="formlogin">
+                <div class="login-title" style="float :center;" >
+                    <div id="loginbox" class="loginbox">
+
+                        <form ng-submit="login()">
+                            <fieldset class="input">
+
+                                <div class="input-group">
+                                    <input class="input-login form-control" type="text" ng-model="loginData.user_id" ng-value="dataProfile.name" placeholder="Username" required/>  
+                                    <span class="input-group-addon" title="Username"><i class="fa fa-user"></i></span>
+                                </div>
+                                <p>&nbsp</p>
+                                <!-- show password as type="password" -->
+                                <div>
+                                <div class="input-group" ng-if="!showPassword" style="width: 100%">
+                                    <input class=" form-control" type="password"  placeholder="Kata sandi" ng-model="loginData.password" ng- title="Password" required/>
+                                    <span class="input-group-addon" ng-click="toggleShowPassword()"><i class="ion-eye"></i></span>
+                                </div>
+                                 <!-- show password as type="text" -->
+                                <div class="input-group" ng-if="showPassword" style="width: 100%" >
+                                    <input class="form-control" type="text" placeholder="Kata sandi" ng-model="loginData.password" ng- title="Password" required/>
+                                    <span class="input-group-addon" ng-click="toggleShowPassword()"><i class="ion-eye-disabled"></i></span>
+                                </div>
+                                </div>
+
+                                <div class="remember">
+                                    <div class="row">
+                                        <div class="col left">
+                                            <label class="error" style="display:{{error.show}};">{{error.message}}</label>
+                                        </div>
+                                    </div>
+                                    <input type="submit" name="submit" class="btn btn-default" value="MASUK"> 
+                                    <div class="clear"></div>
+                                    <div class="row row2" style="margin-top: 20px !important;">
+                                        <div class="col font11em text-left">
+                                            <a class="forgot-password" ui-sref="app.lupa-password">Lupa Sandi?</a>
+                                        </div>
+                                        <div class="col font11em" style="text-align: right;">
+                                            <a ui-sref="app.daftar" style="color: #01d2ff"><u>Daftar Baru</u></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                        </form>
+
+                          <!--   <div class="row sosmed" style="margin: 20px auto !important;">
+                                <div class="col"><i class="fa fa-facebook"></i></div>
+                                <div class="col"><i class="fa fa-instagram"></i></div>
+                                <div class="col"><i class="fa fa-twitter"></i></div>
+                                <div class="col"><i class="fa fa-whatsapp"></i></div>
+                                <div class="col"><i class="fa fa-question-circle"></i></div>
+                            </div> -->
+
+                            <div class="clear"></div>
+                            <div class="bantuan margin10">
+                                <a  class="help" ui-sref="app.bantuan">Bantuan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- End Content -->
+
+    </ion-content>
+</ion-view>

@@ -1,0 +1,42 @@
+<ion-view ng-controller="verifikasiCtrl" title="Verifikasi">
+<ion-content>
+
+<!-- Content -->
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+                <p class="margin10"> Silahkan cek email anda untuk kode verifikasi.</p>
+            <div class="formlogin">
+                <div class="login-title" style="float:center;" >
+                    <div id="loginbox" class="loginbox">
+                        <form ng-submit="submit()" novalidate>
+                            <fieldset class="input">
+                                <div class="input-group">
+                                    <input class="input-login form-control" type="text" ng-model="data.code" placeholder="Kode Verifikasi" style="text-transform:uppercase" required/>  
+                                    <span class="input-group-addon" title="Kode Verifikasi"><i class="fa fa-user"></i></span>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col margin10" >
+                                        <a ng-click="sendCode()" style="color: #01d2ff; font-size:10pt;">Kirim ulang kode verifikasi</a>
+                                    </div>
+                                </div>
+                                <div class="remember">
+                                    <div class="row">
+                                        <div class="col left">
+                                            <label class="error" style="display:{{error.show}};">{{error.message}}</label>
+                                        </div>
+                                    </div>
+                                    <input type="submit" name="submit" class="btn btn-default" value="Verifikasi">
+                                </div>
+                            </fieldset>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Content -->
+    </ion-content>
+</ion-view>

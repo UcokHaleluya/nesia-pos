@@ -1,0 +1,272 @@
+<ion-view ng-controller="laporanDanGrafikCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+      <!-- Content -->
+      <div class="main">
+         <div class="head-list warna">
+            <h4 class="text-left judul-besar">LAPORAN DAN GRAFIK</h4>
+         </div>
+         <tab-slide-box tab="0">
+            <div class="tsb-icons warna">
+               <div class="tsb-ic-wrp">
+                  <ion-scroll direction="x" class="tsb-hscroll" style="height: 50px; width: 100%;">
+                     <div class="row text-center">
+                        <div class="col">
+                           <a ng-click="">LAPORAN</a>
+                        </div>
+                        <div class="col">
+                           <a ng-click="">GRAFIK</a>
+                        </div>
+                     </div>
+                  </ion-scroll>
+               </div>
+            </div>
+            <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+               <ion-slide scroll="true">
+                  <div class="margin10 form-horizontal">
+                     <div class="row" >
+                        <div class="col col-33">
+                           <label class="text-reportandgraph">Dari </label>
+                        </div>
+                        <div class="col">
+                           <input class="input-produk-detail" ng-model="data.table.from_date" placeholder="dd/mm/yyyy" type="date" ngMax="{{data.table.to_date | date:'MM-dd-yyyy'}}"></input>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col col-33">
+                           <label class="text-reportandgraph">Sampai </label>
+                        </div>
+                        <div class="col">
+                           <input class="input-produk-detail" ng-model="data.table.to_date" placeholder="dd/mm/yyyy" type="date" ngMin="{{data.table.from_date | date:'dd-MM-yyyy'}}"></input>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col col-33">
+                           <label class="text-reportandgraph">Laporan</label>
+                        </div>
+                        <div class="col">
+                           <select class="text-center warna-select input-select" ng-model="data.table.jenis_laporan" ng-options="item.value as item.text for item in data.reports">
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col col-33">
+                           <label class="text-reportandgraph">Urutkan Berdasarkan</label>
+                        </div>
+                        <div class="col">
+                           <select class="text-center warna-select input-select" ng-model="data.table.order">
+                              <option value="desc">Terbaik</option>
+                              <option value="asc">Terburuk</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col col-33">
+                        </div>
+                        <div class="col">
+                           <button class="btn btn-default pull-right" ng-click="tampilkanTable()">Tampilkan</button>
+                        </div>
+                     </div>
+                     <div style="margin-top: 10px !important;" class="table">
+                        <!-- Table Pelanggan -->
+                        <ion-scroll zooming="true" direction="xy"  ng-show="table.jenis_laporan == 'customer_n'">
+                           <table class="table-scroll strip margin10 list-laporan">
+                              <tr>
+                                 <th>Rank</th>
+                                 <th>Nama Pelanggan</th>
+                                 <th>Nominal</th>
+                              </tr>
+                              <tr ng-repeat="(key, value) in table.lists" ng-click="href(value)" ng-show="table.lists.length">
+                                 <td>{{key + 1}}</td>
+                                 <td>{{value.name}}</td>
+                                 <td>{{value.amount | currency : "Rp. " : 0}}</td>
+                              </tr>
+                              <tr ng-hide="table.lists.length">
+                                 <td colspan="3">Data tidak ditemukan</td>
+                              </tr>
+                           </table>
+                        </ion-scroll>
+                        <!-- Table Kategori -->
+                        <ion-scroll zooming="true" direction="xy">
+                           <table class="table-scroll strip margin10 list-laporan" ng-show="table.jenis_laporan == 'customer_t'">
+                              <tr>
+                                 <th>Rank</th>
+                                 <th>Nama Pelanggan</th>
+                                 <th>Transaksi</th>
+                              </tr>
+                              <tr ng-repeat="(key, value) in table.lists" ng-click="href(value)" ng-show="table.lists.length">
+                                 <td>{{key + 1}}</td>
+                                 <td>{{value.name}}</td>
+                                 <td>{{value.count}}</td>
+                              </tr>
+                              <tr ng-hide="table.lists.length">
+                                 <td colspan="3">Data tidak ditemukan</td>
+                              </tr>
+                           </table>
+                        </ion-scroll>
+                        <!-- Table Supplier -->
+                        <ion-scroll zooming="true" direction="xy">
+                           <table class="table-scroll strip margin10 list-laporan" ng-show="table.jenis_laporan == 'salesman'">
+                              <tr>
+                                 <th>Rank</th>
+                                 <th>Nama Salesman</th>
+                                 <th>Nominal</th>
+                              </tr>
+                              <tr ng-repeat="(key, value) in table.lists" ng-click="href(value)" ng-show="table.lists.length">
+                                 <td>{{key + 1}}</td>
+                                 <td>{{value.name == null ? 'Toko' : value.name}}</td>
+                                 <td>{{value.amount | currency : "Rp. " : 0}}</td>
+                              </tr>
+                              <tr ng-hide="table.lists.length">
+                                 <td colspan="3">Data tidak ditemukan</td>
+                              </tr>
+                           </table>
+                        </ion-scroll>
+                        <!-- Table Sales -->
+                        <ion-scroll zooming="true" direction="xy">
+                           <table class="table-scroll strip margin10 list-laporan" ng-show="table.jenis_laporan == 'warehouse'">
+                              <tr>
+                                 <th>Rank</th>
+                                 <th>Nama Sales</th>
+                                 <th>Total</th>
+                              </tr>
+                              <tr ng-repeat="(key, value) in table.lists" ng-click="href(value)" ng-show="table.lists.length">
+                                 <td>{{key + 1}}</td>
+                                 <td>{{value.name}}</td>
+                                 <td>{{value.amount  | currency : "Rp. " : 0}}</td>
+                              </tr>
+                              <tr ng-hide="table.lists.length">
+                                 <td colspan="3">Data tidak ditemukan</td>
+                              </tr>
+                           </table>
+                        </ion-scroll>
+                        <!-- Table Produk -->
+                        <ion-scroll zooming="true" direction="xy" scrolling ="y">
+                           <table class="table-scroll strip margin10 list-laporan" ng-show="table.jenis_laporan == 'product'">
+                              <tr>
+                                 <th>Rank</th>
+                                 <th>Produk</th>
+                                 <th>Transaksi</th>
+                                 <th>Nominal</th>
+                              </tr>
+                              <tr ng-repeat="(key, value) in table.lists" ng-click="href(value)" ng-show="table.lists.length">
+                                 <td>{{key + 1}}</td>
+                                 <td>{{value.name | cut:true:20:'...'}}</td>
+                                 <td>{{value.count}}</td>
+                                 <td>{{value.amount  | currency : "Rp. " : 0}}</td>
+                              </tr>
+                              <tr ng-hide="table.lists.length">
+                                 <td colspan="4">Data tidak ditemukan</td>
+                              </tr>
+                           </table>
+                        </ion-scroll>
+                        <ion-scroll zooming="true" direction="xy" scrolling="y">
+                           <table class="table-scroll strip margin10 list-laporan" ng-show="table.jenis_laporan == 'product_n'">
+                              <tr>
+                                 <th>Rank</th>
+                                 <th>Produk</th>
+                                 <th>Nominal</th>
+                                 <th>Transaksi</th>
+                              </tr>
+                              <tr ng-repeat="(key, value) in table.lists" ng-click="href(value)" ng-show="table.lists.length">
+                                 <td>{{key + 1}}</td>
+                                 <td>{{value.name | cut:true:20:'...'}}</td>
+                                 <td>{{value.amount  | currency : "Rp. " : 0}}</td>
+                                 <td>{{value.count}}</td>
+                              </tr>
+                              <tr ng-hide="table.lists.length">
+                                 <td colspan="4">Data tidak ditemukan</td>
+                              </tr>
+                           </table>
+                        </ion-scroll>
+                        <ion-scroll zooming="true" direction="xy" scrolling ="y">
+                           <table class="table-scroll strip margin10 list-laporan" ng-show="table.jenis_laporan == 'product_l'">
+                              <tr>
+                                 <th>Rank</th>
+                                 <th>Produk</th>
+                                 <th>Transaksi</th>
+                                 <th>Nominal</th>
+                              </tr>
+                              <tr ng-repeat="(key, value) in table.lists" ng-click="href(value)" ng-show="table.lists.length">
+                                 <td>{{key + 1}}</td>
+                                 <td>{{value.name | cut:true:20:'...'}}</td>
+                                 <td>{{value.count}}</td>
+                                 <td>{{value.amount  | currency : "Rp. " : 0}}</td>
+                              </tr>
+                              <tr ng-hide="table.lists.length">
+                                 <td colspan="4">Data tidak ditemukan</td>
+                              </tr>
+                           </table>
+                        </ion-scroll>
+                     </div>
+                  </div>
+                  </ion-tabs>
+               </ion-slide>
+               <ion-slide>
+                  <div class="margin10 form-horizontal">
+                     <div class="row" >
+                        <div class="col col-33">
+                           <label class="text-reportandgraph">Dari </label>
+                        </div>
+                        <div class="col">
+                           <input class="input-produk-detail" ng-model="data.chart.from_date" placeholder="dd/mm/yyyy" type="date" ngMax="{{data.chart.to_date | date:'MM-dd-yyyy'}}"></input>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col col-33">
+                           <label class="text-reportandgraph">Sampai </label>
+                        </div>
+                        <div class="col">
+                           <input class="input-produk-detail" ng-model="data.chart.to_date" placeholder="dd/mm/yyyy" type="date" ngMin="{{data.chart.from_date | date:'MM-dd-yyyy'}}"></input>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col col-33">
+                           <label class="text-reportandgraph">Laporan</label>
+                        </div>
+                        <div class="col">
+                           <select class="text-center warna-select input-select" ng-model="data.chart.jenis_laporan" ng-options="item.value as item.text for item in data.reports">
+                              <!-- <option value="customer_n">Penjualan per pelanggan(nominal)</option>
+                                 <option value="customer_t">Penjualan per pelanggan(transaksi)</option>
+                                 <option value="salesman" >Penjualan salesman</option>
+                                 <option value="warehouse">Penjualan per toko</option>
+                                 <option value="product">Penjualan per produk(transaksi)</option> -->
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col col-33">
+                           <label class="text-reportandgraph">Urutkan Berdasarkan</label>
+                        </div>
+                        <div class="col">
+                           <select class="text-center warna-select input-select" ng-model="data.chart.order">
+                              <option value="desc">Terbaik</option>
+                              <option value="asc">Terburuk</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col col-33">
+                        </div>
+                        <div class="col">
+                           <button class="btn btn-default pull-right" ng-click="tampilkanChart()">Tampilkan</button>
+                        </div>
+                     </div>
+                     <div class="chart margin10">
+                        <div class="card">
+                           <div class="item item-divider">
+                              {{chart.title}}
+                           </div>
+                           <div class="item item-text-wrap">
+                              <canvas id="line" class="chart chart-line" chart-data="chart.data" chart-options="options" chart-labels="chart.labels" chart-legend="false" chart-series="false" chart-click="onClick">
+                              </canvas>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </ion-slide>
+            </ion-slide-box>
+         </tab-slide-box>
+      </div>
+      <!-- End Content -->
+   </ion-content>
+</ion-view>

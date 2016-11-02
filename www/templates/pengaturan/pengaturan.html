@@ -1,0 +1,286 @@
+<ion-view ng-controller="pengaturanCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+<ion-content>
+<!-- Content -->
+<div class="head-list warna">
+   <h4 class="text-left judul-besar">
+      Pengaturan
+      <div class="icon-kanan">
+         <button class="btn btn-md btn-transparant" ng-click="edit()">
+            <i class="fa fa-pencil" ng-style="iconEdit"></i>
+         </button>
+         <button class="btn btn-md btn-transparant" ng-click="save()">
+            <i class="fa fa-floppy-o"></i>
+         </button>
+      </div>
+   </h4>
+</div>
+<div class="container" style="margin: 15px auto !important;">
+   <div class="foto">
+      <button class="btn-disabled" ng-click="ambilFotoAdmin()" ng-disabled="disabled">
+         <img src="{{dataProfile.picture}}" id="fotoAdmin" class="person" ng-model="dataProfile.picture">
+      </button>
+   </div>
+   <div class="kanan-foto">
+      ID : <i class="ion-at"></i><span>{{dataUser.id | numberFixedLen:3 }}</span> <br/>
+   </div>
+</div>
+<tab-slide-box tab="0" >
+<div class="tsb-icons warna">
+   <div class="tsb-ic-wrp">
+      <ion-scroll direction="x" class="tsb-hscroll" style="height: 35px;">
+      <a ng-click="">DETAIL</a>
+      <a ng-click="">PREFERENSI</a>
+      <a ng-click="">KONVERSI</a>
+      <a ng-click="">ORIENTASI</a>
+      <a ng-click="">AKSES</a>
+   </ion-scroll>
+</div>
+</div>
+<ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+<ion-slide>
+<div style="overflow-y: scroll; height: 100%;">
+   <div class="container">
+      <div id="detail">
+         <div class="row margin10">
+            <div class="col">
+               <button class="btn-disabled" ng-click="ambilLogoBisnis()" ng-disabled="disabled">
+                  <img src="{{dataBusiness.logo}}" id="logoBisnis" ng-model="dataBusiness.logo" style="width: 90px;">
+               </button>
+            </div>
+            <div class="row">
+               <div class="col">
+                  <h4 class="icon-setting">{{dataUser.user_id}}</h4>
+                  <i class="ion-android-calendar icon-setting"></i>  <span style="margin-left: 5px;" ng-bind="bindDate(dataUser.created_at)" class="icon-setting"></span>
+                  <div>           
+                     <span model="badge"><img src="{{dataRole.logo}}" ng-model="dataRole.logo" style="width: 50px;height: 50px;"></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <p class="judul-sub-detail">DETAIL AKUN</p>
+         <br>
+         <form>
+            <i class="icon-text ion-person icon-setting"></i>
+            <input class="input-kontak" type="text" ng-model="dataProfile.name" ng-disabled="disabled" required
+            placeholder="Nama lengkap" />
+            <i class="icon-text ion-calendar icon-setting"></i>
+            <input type="date" class="input-kontak" ng-model="dataProfile.birth_date" ng-value="dataProfile.birth_date" required ng-disabled="disabled" placeholder="Tanggal Lahir" min="1900-01-01" ng-max="tanggalMaks"/>
+            <i class="icon-text ion-ios-telephone icon-setting"></i>
+            <input class="input-kontak" type="tel" ng-model="dataProfile.phone" required ng-disabled="disabled"placeholder="Nomor telepon" />
+            <i class="icon-text ion-iphone icon-setting"></i>
+            <input class="input-kontak" type="tel" ng-model="dataProfile.mobile" required ng-disabled="disabled" placeholder="Nomor handphone"/>
+            <i class="icon-text ion-email icon-setting"></i>
+            <input class="input-kontak" type="email" ng-model="dataProfile.email" required ng-disabled="disabled" placeholder="Email"/>
+            <i class="icon-text ion-male icon-setting"></i>
+            <div class="row" style="color: white; width: 95%">
+               <div class="col">
+                  <label class="register-gender" >
+                     <input type="radio"  ng-disabled="disabled" ng-model="dataProfile.gender" value="1">
+                     Laki-laki
+                  </label>
+               </div>
+               <div class="col">
+                  <label class="register-gender">
+                     <input type="radio" ng-disabled="disabled" ng-model="dataProfile.gender"
+                     value="0">
+                     Perempuan
+                  </label>
+               </div>
+            </div>
+            <i class="icon-text ion-ios-home-outline posisi-icon register-gender"></i>
+            <input class="input-kontak" type="text" ng-model="dataProfile.address" required ng-disabled="disabled" placeholder="Alamat"/>
+         </form>
+      </div>
+      <div id="detail-bisnis-admin">
+         <form>
+            <p class="judul-sub-detail">DETAIL BISNIS ADMIN</p>
+            <div style="clear: both;"></div>
+            <i class="icon-text ion-person posisi-icon icon-setting"></i>
+            <input class="input-kontak" type="text" ng-model="dataBusiness.name" required ng-disabled="disabled" placeholder="Nama bisnis"/>
+            <i class="icon-text ion-ios-telephone icon-setting"></i>
+            <input class="input-kontak" type="tel" ng-model="dataBusiness.phone" required ng-disabled="disabled" placeholder="Nomor telepon bisnis"/>
+            <i class="icon-text ion-email icon-setting"></i>
+            <input class="input-kontak" type="email" ng-model="dataBusiness.email" required ng-disabled="disabled" placeholder="Email bisnis"/>
+            <i class="icon-text ion-ios-home-outline icon-setting"></i>
+            <input class="input-kontak" type="text" ng-model="dataBusiness.address" required ng-disabled="disabled" placeholder="Alamat bisnis"/>
+         </form>
+      </div>
+      <div id="detail-bank">
+         <form>
+            <p class="judul-sub-detail">DETAIL BANK</p>
+            <div style="clear: both;"></div>
+            <div class="row">
+               <div class="col">
+                  <p class="margin-kiri20 textdetail-setting">NAMA BANK</p>
+                  <input class="input-kontak" type="text" ng-model="dataBank[0].bank" required ng-disabled="disabled" placeholder="Nama bank"/>
+               </div>
+               <div class="col">
+                  <p class="margin-kiri20 textdetail-setting">CABANG</p>
+                  <input class="input-kontak" type="text" ng-model="dataBank[0].branch" required ng-disabled="disabled" style="width: 80%;" placeholder="Cabang bank"/>
+               </div>
+            </div>
+            <p class="margin-kiri20 textdetail-setting">NAMA AKUN</p>
+            <input class="input-kontak" type="text" ng-model="dataBank[0].account_name" required ng-disabled="disabled" placeholder="Nama rekening"/>
+            <p class="margin-kiri20 textdetail-setting">NOMOR AKUN</p>
+            <input class="input-kontak" type="number" ng-model="dataBank[0].account_no" ng-disabled="disabled" placeholder="Nomor rekening"/>
+            <textarea class="input-kontak" ng-model="dataBank[0].remarks" ng-disabled="disabled" style="border-radius: 0;" placeholder="Catatan bank"></textarea>
+         </form>
+      </div>
+      <div id="detail-Katasandi">
+         <p class="judul-sub-detail">KATA SANDI</p>
+         <br>
+         <form>
+            <i class="icon-text ion-ios-locked textdetail-setting"></i>
+            <input class="input-kontak" type="password" ng-model="dataPassword.old_password" required placeholder="Kata sandi lama" ng-disabled="disabled"/>
+            <i class="icon-text ion-ios-locked-outline textdetail-setting"></i>
+            <input class="input-kontak" type="password" ng-model="dataPassword.new_password"
+            title="Kata Sandi minimal 8 karakter atau lebih (mengandung minimal 1 angka, 1 huruf besar dan 1 huruf kecil)" required placeholder="Kata sandi baru" ng-disabled="disabled"/>
+            <i class="icon-text ion-ios-locked-outline textdetail-setting"></i>
+            <input class="input-kontak" type="password" ng-model="dataPassword.confirm_password" title="Kata Sandi harus sama dengan di atas" required placeholder="Konfirmasi kata sandi baru" ng-disabled="disabled"/>
+         </form>
+      </div>
+   </div>
+</div>
+</ion-slide>
+<ion-slide>
+<div style="overflow-y: scroll; height: 100%;">
+   <div class="container">
+      <p class="judul-sub-detail" style="margin-top: 20px ;">METODE STOK</p>
+         <div style="clear: both"></div>
+         <div style="text-align:left; margin:5px;">
+            <select class="text-center warna-select input-select" style="width: 150px; margin-top: 10px;" ng-disabled="disabled">
+               <option selected class="background-select" value="FIFO">FIFO</option>
+               <option value="LIFO">LIFO</option>
+               <option value="AVG">AVG</option>
+            </select>
+         </div>
+      <p class="judul-sub-detail" style="margin-top: 20px ;">PAJAK TETAP</p>
+         <div style="clear: both"></div>
+         <div class="row">            
+            <div class="col col-50">
+               <label style="margin-top: 10px;background: transparent;" class="item-input-wrapper default">
+                  <input type="number" class="input-select" ng-model="preferensi.data.default_tax" ng-disabled="disabled">
+                   &nbsp; <span class="tax-percent">%</span>   
+               </label>               
+            </div>            
+         </div>
+      <div id="pelanggan-cash">
+         <form>
+            <p class="judul-sub-detail" style="margin-top: 20px ;">PELANGGAN CASH</p>
+            <div style="clear:both;"></div>
+            <div class="row">
+               <div class="col">
+                  <p class="preference-setting">Default Sales</p>
+               </div>
+               <div class="col">
+                  <ion-list class="default setting">
+                  <ion-checkbox ng-repeat="(key,value) in preferensi.cashType" ng-model="preferensi.data.cash_type" ng-true-value="'{{key}}'" ng-false-value="" ng-disabled="disabled">{{value}}</ion-checkbox>
+               </ion-list>
+            </div>
+         </div>
+         </form>
+      </div>
+   <form>
+      <div id="gudang">
+         <form>
+            <p class="judul-sub-detail" style="margin-top: 20px ;">GUDANG</p>
+            <div style="clear: both"></div>
+            <div class="col" style="text-align: left; ">
+               <p class="preference-setting">Status Gudang <span class="preference-setting">{{preferensi.status}}</span></p>
+            </div>
+         </form>         
+         <p class="judul-sub-detail">TEMA</p>
+         <div style="clear: both"></div>
+         <div class="text-left">
+            <div class="row">
+               <div class="col">
+                  <a class="button button-calm tombol-tema" ng-click="tema('')" style="background-color: #4f667b !important;">Biru Gelap</a><br/>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col">
+                  <a class="button button-calm tombol-tema" ng-click="tema('blue-calm')"  style="background-color: #0a9dc7 !important;">Biru Langit</a><br/> 
+               </div>
+            </div>
+            <div class="row">
+               <div class="col">
+                  <a class="button button-calm tombol-tema" ng-click="tema('light-pink')" style="background-color:#f34f93;">Merah Jambu</a><br/> 
+               </div>
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+</div>
+</form>
+<a ui-sref="pos.bantuan" class="preference-setting" style="float: right; margin-top: 20px;">Bantuan</a>
+</div>
+</ion-slide>
+<ion-slide>
+<div class="row margin10">
+   <div class="col-40" style="margin-left:5px;">
+      <input class="input-konversi" type="text" ng-model="unit.unit" ng-disabled="disabled" required placeholder="Nama Satuan" />
+   </div>
+   <div class="col-25">
+      <input class="input-konversi" type="number" ng-model="unit.conversion" ng-disabled="disabled" required placeholder=" Input" />
+   </div>
+   <div class="col-30">
+      <select class="unit-parent" ng-model="unit.parent" ng-options="p as p.unit for p in unitparents" ng-disabled="disabled">
+      </select>
+   </div>
+   <div class="col-10">
+      <button class="btn btn-md-field btn-transparant add-konversi">
+         <i class="icon ion-plus-round" id="id_unit" ng-click="tambahkonversi()"></i></button>               
+      </div>
+   </div>
+   <div class="row">
+      <div class="col">
+         <ul>
+            <div class="row margin10 sub-list-konversi">
+               <div class="col list-konversi" >Nama Satuan</div>
+               <div class="col list-konversi" >Input</div>
+               <div class="col list-konversi" >Konversi Ke</div>
+               <div class="col list-konversi" >&nbsp;</div>
+            </div>
+            <li ng-repeat="(index, unit) in units">
+               <div class="row {{unit.is_delete == 1 ? 'con-delete' : ''}}" data-id="{{unit.is_delete}}">
+                  <div class="col listkonversi">{{unit.unit}} </div>
+                  <div class="col listkonversi">{{unit.conversion}} </div>
+                  <div class="col listkonversi">{{unit.parent}} </div>
+                  <div class="col">
+                     <button class="btn btn-md-field btn-transparant icon-setting" ng-click="hapuskonversi(this)">
+                        <i class="fa fa-trash"></i>
+                     </button>
+                     <button class="btn btn-md-field btn-transparant icon-setting" ng-click="editkonversi(unit)">
+                        <i style="margin-left : 15px;" class="fa fa-pencil editkonversi"></i>
+                     </button>
+                  </div>
+               </div>
+            </li>
+         </ul>
+      </div>
+   </div>
+</ion-slide>
+<ion-slide>
+<button class="button button-full button-positive " ng-click="changeOriantationLandspace()">Ganti Menjadi Model Landspace</button><br/>
+<button class="button button-full button-positive " ng-click="changeOriantationPortrait()">Ganti Menjadi Model Portrait</button><br/>
+</ion-slide>
+<ion-slide>
+<h4 class="margin10 comingsoon">Belum Tersedia</h4>
+               <!--                 <ion-list class="default setting">
+                  <ion-checkbox ng-model="filter.produk">PRODUK</ion-checkbox>
+                  <ion-checkbox ng-model="filter.penjualan">PENJUALAN</ion-checkbox>
+                  <ion-checkbox ng-model="filter.pembelian">PEMBELIAN</ion-checkbox>
+                  <ion-checkbox ng-model="filter.laporan">LAPORAN DAN GRAFIK</ion-checkbox>
+                  <ion-checkbox ng-model="filter.kontak">KONTAK</ion-checkbox>  
+                  <ion-checkbox ng-model="filter.pengiriman">PENGIRIMAN</ion-checkbox>
+                  <ion-checkbox ng-model="filter.gudang">GUDANG</ion-checkbox>
+                  <ion-checkbox ng-model="filter.pengeluaran">PENGELUARAN</ion-checkbox>
+                  <ion-checkbox ng-model="filter.pengaturan">PENGATURAN</ion-checkbox>
+               </ion-list> -->
+            </ion-slide>
+         </ion-slide-box>
+      </tab-slide-box>
+      <!-- End Content -->
+   </ion-content>
+</ion-view>

@@ -1,0 +1,188 @@
+<ion-view ng-controller="penjualanDetailCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+  <ion-content>
+        <div class="head-list warna">
+         <h4 class="text-left judul-besar">
+            DETAIL PENJUALAN
+            <div class="icon-kanan">
+               <button class="btn btn-md btn-transparant" ng-click="kirimEmail()">
+               <i class="fa fa ion-at" ></i>
+               </button>
+              <button class="btn btn-md btn-transparant" ng-click="prod_add()">
+               <i class="fa fa ion-printer" ></i>
+               </button>
+            </div>
+         </h4> 
+      </div>
+    <div class="margin10 form-horizontal">
+      <div class="row" ng-show="setting.type === 'pro'">
+        <div class="col col-33">
+          <label>Gudang</label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" ng-model="data.warehouse_name" ng-disabled="true"></input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-33">
+          <label>Tanggal </label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" ng-model="data.tanggal" placeholder="dd/mm/yyyy" type="date" ng-disabled="true"></input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-33">
+          <label>No. Faktur </label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" ng-model="data.invoice" ng-disabled="true"></input>
+        </div>
+      </div>
+      <div class="row" ng-show="setting.type === 'pro'">
+        <div class="col col-33">
+          <label>Pelanggan </label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" ng-model="data.customer" ng-disabled="true"></input>
+        </div>
+      </div>
+      <div class="row" ng-show="setting.type === 'pro'">
+        <div class="col col-33">
+          <label>Sales </label>
+        </div>
+        <div class="col">
+          <input class="input-produk-detail" ng-model="data.sales" ng-disabled="true"></input>
+        </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="margin10">
+      <ion-scroll zooming="true" direction="x">
+        <table class="table-scroll">
+          <tr>
+            <th>Kode</th>
+            <th>Nama</th>
+            <th>Jumlah</th>
+            <th>Unit</th>
+            <th>Diskon</th>
+            <th>Rp.</th>
+          </tr>
+          <tr ng-repeat="(key, detail) in data.detail">
+            <td>{{(detail.code == "") ? "--" : detail.code}}</td>
+            <td>{{detail.name}}</td>
+            <td class="number">{{detail.jumlah}}</td>
+            <td>{{detail.unit}}</td>
+            <td class="number">{{detail.discount}}</td>
+            <td>{{detail.total_price | currency : "Rp. " : 0}}</td>
+          </tr>
+        </table>
+      </ion-scroll>
+    </div>
+
+    <div class="margin10 tebal">
+      <div class="row odd">
+        <div class="col col-50 text-right">
+          <span>SUB TOTAL 1</span>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col text-right col-33">
+          <span>{{data.sub_total_1 | currency : "Rp. " : 0}}</span>
+        </div>
+      </div>
+      <div class="row even">
+        <div class="col col-50 text-right">
+          <span>PAJAK 1</span>
+        </div>
+        <div class="col col-20">
+          ({{((data.pajak_1 == null) ? 0 : data.pajak_1) * 100}}%)
+        </div>
+        <div class="col text-right">
+          {{data.pajak_1_price | currency : "Rp. " : 0}}
+        </div>
+      </div>
+      <div class="row odd">
+        <div class="col col-50 text-right">
+          <span>PAJAK 2</span>
+        </div>
+        <div class="col col-20">
+          {{data.pajak_2_type == '2' ? "(" + (data.pajak_2 | number : 0) + "%)" : ""}}
+        </div>
+        <div class="col text-right">
+          {{data.pajak_2_price | currency : "Rp. " : 0}}
+        </div>
+      </div>
+      <div class="row even">
+        <div class="col col-50 text-right">
+          <span>DISKON</span>
+        </div>
+        <div class="col col-20">
+          {{data.discount_type == '2' ? "(" + ((data.discount==null) ? 0 : data.discount | number : 0) + "%)" : ""}}
+        </div>
+        <div class="col text-right">
+          {{data.discount_price | currency : "Rp. " : 0}}
+        </div>
+      </div>
+      <div class="row odd">
+        <div class="col col-50 text-right">
+          <span>SUB TOTAL 2</span>
+        </div>
+        <div class="col text-right">
+          <span>{{data.sub_total_2 | currency : "Rp. " : 0}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="margin10 payment">
+      <div class="row">
+          <div class="col">
+            <span>METODE PEMBAYARAN</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="input">{{data.payment_type}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <span>GRAND TOTAL</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="input">{{data.grand_total | currency : 'Rp. ' : 0}}</label>
+          </div>
+        </div>
+        <div class="row margin10">
+          <div class="col">
+            <span>BAYAR</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+          <label class="input">{{data.payment | currency : 'Rp. ' : 0}}</label>
+          </div>
+        </div>
+        <div class="row margin10">
+          <div class="col">
+            <span>KEMBALIAN</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="input">{{data.change | currency : 'Rp. ' : 0}}</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="margin10">
+      <div class="row">
+        <div class="col">
+          <textarea class="inputpengeluaran" placeholder="NOTE" ng-model="data.note" ng-disabled="true"></textarea>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,84 @@
+<ion-view ng-controller="pengirimanCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+      <div class="main">
+      <div class="head-list warna" style="padding: 0.02px;">
+         <h4 class="text-left judul-besar" style="width: 100% !Important;">PENGIRIMAN</h4>
+      </div>
+      <div class="list list-inset">
+         <div class="row">
+            <div class="col">
+               <div class="item-custom input-group input-group-line-bottom">
+                  <i class="icon ion-search placeholder-icon"></i>
+                  <input ng-model="param.cari" type="text" class="" placeholder="Cari menggunakan Nama Produk / ID">
+               </div>
+               <a ng-click="scanBarcode()"><i class="fa fa-camera-retro"></i></a>
+            </div>
+         </div>
+      </div>
+      <div class="margin10 form-horizontal" style="color:#fff;">
+      <div class="row" >
+         <div class="col col-33">
+            <label>Dari </label>
+         </div>
+         <div class="col">
+            <input class="input-produk-detail" ng-model="data.date_from" placeholder="dd/mm/yyyy" type="date"></input>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col col-33">
+            <label>Sampai </label>
+         </div>
+         <div class="col">
+            <input class="input-produk-detail" ng-model="data.date_to" placeholder="dd/mm/yyyy" type="date"></input>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col col-33">
+            <label>Status</label>
+         </div>
+         <div class="col">
+            <select class="text-center warna-select input-select">
+               <option>Semua</option>
+               <option>Lunas</option>
+               <option>Hutang</option>
+            </select>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col col-33">
+            <label>Urut Berdasarkan</label>
+         </div>
+         <div class="col">
+            <select class="text-center warna-select input-select">
+               <option>Tanggal</option>
+               <option>Nomor Faktur</option>
+               <option>Lokasi</option>
+            </select>
+         </div>
+      </div>
+      <div class="posisi-konten-tab-laporan margin10" >
+         <div class="header-kategori">
+            <div class="row even tebal" style="margin-top: 10px;">
+               <div class="col">TANGGAL</div>
+               <div class="col">NO. FAKTUR</div>
+               <div class="col">LOKASI</div>
+               <div class="col">STATUS</div>
+            </div>
+            <div class="konten-kategori">
+               <div class="row odd">
+                  <div class="col">12/12/15</div>
+                  <div class="col">NO. FAKTUR</div>
+                  <div class="col">TOKO 1</div>
+                  <div class="col white-stroke" style="color: green; font-weight: bold;">LUNAS</div>
+               </div>
+               <div class="row even">
+                  <div class="col">15/12/15</div>
+                  <div class="col">NO. FAKTUR</div>
+                  <div class="col">TOKO 2</div>
+                  <div class="col white-stroke" style="color: red; font-weight: bold;">HUTANG</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </ion-content>
+</ion-view>

@@ -1,0 +1,125 @@
+<ion-view ng-controller="listPengeluaranCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+
+  <ion-content>
+
+		<div class="head-list">
+      <h4 class="text-center" style="font-weight: bold; margin: 20px;">PENGELUARAN</h4>
+    </div>
+
+    <div>
+
+      <form ng-click="">
+
+        <div class="warna">
+
+          <div class="row ">
+
+            <div class="col">
+              <label class="item item-input custompengeluaran">
+                <input type="date" class="inputpengeluaran">
+              </label>
+            </div>
+
+            <div class="col">
+              <input type="number" class="inputpengeluaran" placeholder="NO.FAKTUR" min="1">
+            </div>
+
+            <div class="col">
+              <div class="h5 text-center" style="margin: 0;">
+                <select class="text-center warna-select input-select">
+                  <option value="LISTRIK">LISTRIK</option>
+                  <option value="TELEPON">TELEPON</option>
+                  <option value="INTERNET">INTERNET</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px !Important">
+
+          <div class="row">
+
+            <div style="width: 25%;">90001 INTERNET</div>
+
+            <div style="width: 35%; margin: 0 5px !important;">
+              <input type="text" class="inputpengeluaran" placeholder="KETERANGAN">
+            </div>
+
+            <div style="width: 25%;">
+              <input type="text" class="inputpengeluaran" placeholder="HARGA">
+            </div>
+
+            <div style="width: 15%; margin: 5px !important;">
+              <i class="fa fa-check" style="color:green;"></i>
+              &nbsp;
+              <i class="fa fa-times" style="color:red;"></i>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <div style="margin-top: 10px !important;">
+
+            <div class="row even tebal" style="padding: 5px !Important;">
+              <div style="width: 20%;">ID</div>
+              <div style="width: 25%;">BIAYA</div>
+              <div style="width: 20%;">KET</div>
+              <div style="width: 35%;">TOTAL</div>
+              <div style="width: 5%;"></div>
+            </div>
+
+            <div class="row odd" style="padding: 5px !Important">
+              <div style="width: 20%;">900001</div>
+              <div style="width: 25%;">INTERNET</div>
+              <div class="text-center" style="width: 20%;">-</div>
+              <div style="width: 35%;">1.000.000</div>
+              <div style="width: 5%;"><i class="fa fa-times" style="color:red;"></i></div>
+            </div>
+
+            <div class="row even" style="padding: 5px !Important;">
+              <div style="width: 20%;">900001</div>
+              <div style="width: 25%;">TELEPON</div>
+              <div class="text-center" style="width: 20%;">-</div>
+              <div style="width: 35%;">1.000.000</div>
+              <div style="width: 5%;"><i class="fa fa-times" style="color:red;"></i></div>
+            </div>
+
+            <div class="row odd" style="padding: 5px !Important">
+              <div style="width: 20%;">900003</div>
+              <div style="width: 25%;">DLL</div>
+              <div class="text-center" style="width: 20%;">-</div>
+              <div style="width: 35%;">1.000.000</div>
+              <div style="width: 5%;"><i class="fa fa-times" style="color:red;"></i></div>
+            </div>
+
+            <div class="row even" style="padding: 5px !Important;">
+              <div style="width: 20%;">900004</div>
+              <div style="width: 25%;">TELEPON</div>
+              <div class="text-center" style="width: 20%;">IKLAN</div>
+              <div style="width: 35%;">1.000.000</div>
+              <div style="width: 5%;"><i class="fa fa-times" style="color:red;"></i></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="margin10" style="padding: 10px !important;">
+          <div class="row">
+            <div class="col-60">
+              <textarea class="inputpengeluaran" placeholder="NOTE"></textarea>
+            </div>
+            <div class="col" style="margin-top: 25px !Important;">
+              <input type="submit" name="submit" class="btn btn-default" value="SIMPAN"> 
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+  </ion-content>
+
+</ion-view>

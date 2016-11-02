@@ -1,0 +1,64 @@
+<ion-view ng-controller="riwayatReturCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+    <ion-content>
+        <div class="head-list warna">
+            <h4 class="text-left judul-besar">Riwayat Retur</h4>
+        </div>
+        <div class="margin10 form-horizontal">
+            <div class="row">
+                <div class="col col-33">
+                    <label>Dari </label>
+                </div>
+                <div class="col">
+                    <input class="input-produk-detail" ng-model="data.date_from" placeholder="dd/mm/yyyy" type="date"></input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-33">
+                    <label>Sampai </label>
+                </div>
+                <div class="col">
+                    <input class="input-produk-detail" ng-model="data.date_to" placeholder="dd/mm/yyyy" type="date"></input>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col col-33">
+                    <label>Gudang</label>
+                </div>
+                <div class="col">
+                    <select class="text-center warna-select input-select" ng-options="w.id as w.name for w in warehouses" ng-model="data.warehouse_id">
+                    </select>
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="col col-33">
+                </div>
+                <div class="col">
+                    <button class="btn btn-default pull-right" ng-click="tampilkan()">Tampilkan</button>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 10px !important;" class="table">
+            <ion-scroll zooming="true" direction="xy">
+                <table class="table-scroll">
+                    <tr>
+                        <th>Tanggal Retur</th>
+                        <th>No Faktur Penjualan</th>
+                        <th>No Faktur Retur</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr ng-repeat="(key, value) in lists" ng-show="lists.length" ng-click="href(value)">
+                        <td ng-bind="bindTgl(value.tanggal)"></td>
+                        <td>{{value.old_invoice}}</td>
+                        <td>{{value.invoice}}</td>
+                        <td>{{value.grand_total| currency : "Rp. " : 0}}</td>
+                    </tr>
+
+                    <tr ng-hide="lists.length">
+                        <td colspan="5">Data tidak ditemukan</td>
+                    </tr>
+                </table>
+             </ion-scroll>
+        </div>
+    </ion-content>
+</ion-view>

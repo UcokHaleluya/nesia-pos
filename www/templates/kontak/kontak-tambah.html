@@ -1,0 +1,141 @@
+<ion-view ng-controller="kontakTambahCtrl" title="<img class='title-image' src='{{dataBusiness.logo}}' width='30px' height='30px'>  <b>{{dataBusiness.name}}</b>">
+   <ion-content>
+      <!-- Content -->
+      <div class="head-list warna" style="height: 50px;">
+         <div class="row">
+         <div class="col-50">
+               <input class="input-namakontak" type="text" maxlength="15" autofocus ng-model="tambahKontak.user_id" required placeholder="Username"/>
+            </div>
+            <div class="col-20" style="margin-top: 11px">
+               <span class="text-left judul-besar" style="margin-left: 0;">@{{dataUser.id}}</span>
+            </div>
+            <div class="col" style="float:right; margin-left:50px; font-size:20px;">
+               <button class="btn btn-md btn-transparant" ng-click="add()">
+                  <i class="fa fa-floppy-o" ng-style="iconSave"></i>
+               </button>
+            </div>
+         </div>
+      </div>
+      <div class="container" style="margin: 10px 0 20px 0 !important; padding-right:0px !important;">
+         <div class="foto">
+            <button class="btn-disabled" ng-click="ambilFotoKontak()" ng-disabled="disabled">
+            <img src="{{picture}}" id="fotoKontak">
+            </button>
+         </div>
+         <!-- 
+            <div class="kanan-foto">
+               <i class="ion-pound"></i>
+               <span ng-model="idAdmin">100001</span>
+               <br/>
+               <i class="ion-android-calendar"></i> 
+               <span ng-model="tglBergabung">1/JAN/2015</span>
+               <span model="badge">
+                  <img src="img/silver.png" style="height: 70px; margin-left: 25px; margin-top: -15px;">
+               </span>
+               <div class="warna" style="margin-left: 35%;">
+                  <span model="badge">
+                     <img src="img/hijau.png" style="width: 30px; height: 30px;">
+                  </span>
+                  <span style="color:green; font-weight: bold;">100.000</span> 
+                  <span model="badge">
+                     <img src="img/merah.png" style="width: 30px; height: 30px;">
+                  </span>
+                  <span style="color:red; font-weight: bold;">100.000</span>
+               </div>
+            </div> -->
+      </div>
+      <tab-slide-box tab="0">
+         <div class="tsb-icons warna">
+            <div class="tsb-ic-wrp">
+               <ion-scroll direction="x" class="tsb-hscroll" style="height: 35px; width:100%; text-align:center;">
+                  <div class="row text-center">
+                     <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="">DETAIL</a>
+                     </div>
+                     <div class="col" style="padding: 0 !Important;">
+                        <a ng-click="">KATA SANDI</a>
+                     </div>
+                  </div>
+               </ion-scroll>
+            </div>
+         </div>
+         <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+               <ion-scroll direction="y" style="height:100%">
+                  <div class="container">
+                     <div id="detail">
+                        <form>
+                           <i class="icon-text ion-person icon-setting"></i>
+                           <input class="input-kontak" type="text" ng-model="tambahKontak.name" required placeholder="Nama" ng-disabled="disabled" />
+                           <div class="sales" ng-show="showSales">
+                              <i class="icon-text ion-man icon-setting"></i>
+                              <div class="h5 text-center" style="margin-left: 20px; width: 90%;">
+                                 <select class="text-center warna-select input-select" ng-disabled="disabled" ng-options="sales.name for sales in dataContacts.salesmen track by sales.user_id" ng-model="customer.salesman"></select>
+                              </div>
+                           </div>
+                           <i class="icon-text ion-calendar icon-setting"></i>
+                           <input type="date" class="input-kontak" ng-model="tambahKontak.birth_date" ng-value="tambahKontak.birth_date | date: 'yyyy-MM-dd'" required placeholder="Tanggal lahir" min="1900-01-01" ng-max="tanggalMaks"/>
+                           <i class="icon-text ion-iphone icon-setting"></i>
+                           <input class="input-kontak" type="tel" ng-model="tambahKontak.mobile" required placeholder="Nomor handphone {{kontak.tabName}}" ng-disabled="disabled" />
+                           <i class="icon-text ion-email icon-setting"></i>
+                           <input class="input-kontak" type="email" ng-model="tambahKontak.email" required placeholder="Email" ng-disabled="disabled" />
+                           <i class="icon-text ion-male icon-setting"></i>
+                           <div class="row" style="color: white; width: 95%">
+                              <div class="col">
+                                 <label class="register-gender">
+                                 <input type="radio" ng-model="tambahKontak.gender" value="1">
+                                 Laki-laki
+                                 </label>
+                              </div>
+                              <div class="col">
+                                 <label class="register-gender">
+                                 <input type="radio" ng-model="tambahKontak.gender"
+                                    value="0">
+                                 Perempuan
+                                 </label>
+                              </div>
+                           </div>
+                           <i class="icon-text ion-ios-home-outline posisi-icon icon-setting"></i>
+                           <input class="input-kontak" type="text" ng-model="tambahKontak.address" required ng-disabled="disabled" placeholder="Alamat"/>
+                        </form>
+                     </div>
+                     <div id="detail-bank" ng-show="showBank">
+                        <form>
+                           <p class="judul-sub-detail">DETAIL BANK</p>
+                           <div class="row">
+                              <div class="col">
+                                 <p class="margin-kiri20">NAMA BANK</p>
+                                 <input class="input-kontak" type="text" ng-model="tambahKontak.bank" required placeholder="Bank"  ng-disabled="disabled" />
+                              </div>
+                              <div class="col">
+                                 <p class="margin-kiri20">CABANG</p>
+                                 <input class="input-kontak" type="text" ng-model="tambahKontak.bank_branch" required placeholder="Cabang bank" ng-disabled="disabled" style="width: 80%;" />
+                              </div>
+                           </div>
+                           <p class="margin-kiri20">NAMA AKUN</p>
+                           <input class="input-kontak" type="text" ng-model="tambahKontak.bank_account_name" required placeholder="Nama akun bank" ng-disabled="disabled"/>
+                           <p class="margin-kiri20">NOMOR AKUN</p>
+                           <input class="input-kontak" type="tel" ng-model="tambahKontak.bank_account_no" required placeholder="Nomor rekening bank" ng-disabled="disabled"/>
+                           <textarea class="input-kontak" ng-model="tambahKontak.bank_remarks" style="border-radius: 0;" placeholder="Catatan bank"></textarea>
+                        </form>
+                     </div>
+                  </div>
+               </ion-scroll>
+            </ion-slide>
+            <ion-slide>
+               <ion-scroll direction="y" style="height: 100%; padding: 10px;">
+                  <div id="detail">
+                     <form>
+                        <i class="icon-text ion-ios-locked-outline icon-setting"></i>
+                        <input class="input-kontak" type="password" ng-model="tambahKontak.password" required placeholder="Kata sandi" value=""/>
+                        <i class="ion-alert text-center icon-setting" style="color: white; font-weight: bold;"></i>
+                        <span class="records-password">Jika kata sandi di atas kosong maka, kata sandi untuk kontak ini :<br> <b>(Username anda) {{tambahKontak.user_id+dataUser.id}}</b></span>
+                     </form>
+                  </div>
+               </ion-scroll>
+            </ion-slide>
+         </ion-slide-box>
+      </tab-slide-box>
+      <!-- End Content -->
+   </ion-content>
+</ion-view>

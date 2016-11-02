@@ -1,0 +1,40 @@
+<ion-view ng-controller="praSetelanCtrl" title="Setelan">
+    <ion-content>
+    	<!-- Content -->
+        <div class="main">
+            <div class="shop_top">
+            <h3 class="judul-tengah text-center title-business">Silahkan masukkan <br/>Nama Bisnis dan Logo Anda</h3>
+                <div class="container">
+                    <div class="col-md-6">
+                        <div class="login-page">
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="login-title">
+                            <div id="loginbox" class="loginbox">
+                                <form ng-submit="simpanPraSetelan()">
+                                    <fieldset class="input">
+                                        <div class="input-group">
+                                            <input type="text"  class="form-control input-login" name="user" placeholder="Nama Bisnis Anda" required ng-model="praSetelanData.namaBisnis"/>
+                                            <span class="input-group-addon" title="Nama Bisnis"><i class="ion-ios-home"></i></span>
+                                        </div>
+                                        <div class="text-center" style="margin: 20px;">
+                                            <a ng-click="ambilLogoBisnis()">                                            	
+                                                <img width="35%" src="{{images}}" id="logoBisnis"/><br>
+                                                <span class="title-business">Ubah logo bisnis</span>
+                                            </a>
+                                        </div>
+                                        <div class="remember">
+                                            <input type="submit" name="submit" class="btn btn-default" value="SIMPAN">
+                                        </div>
+                                    </fieldset>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Content -->
+    </ion-content>
+</ion-view> 

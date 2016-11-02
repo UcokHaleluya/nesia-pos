@@ -1,0 +1,79 @@
+<ion-view ng-controller="daftarCtrl" title="Daftar">
+   <ion-content>
+      <!-- Content -->
+      <div class="main">
+         <div class="shop_top">
+            <div class="container">
+               <div class="col-md-6">
+                  <div class="register-page">
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="register-title">
+                     <div id="registerbox" class="registerbox">
+                        <form form-validate data-submit="daftar" class="frm-validation" novalidate>
+                           <fieldset class="input">
+                              <p id="register-form-username">
+                              <div class="form-group">
+                                 <input type="text" custom-validate class="form-control input-daftar" name="username" placeholder="Username (6 s/d 24 karakter)" title="Username" ng-model="daftarData.user_id" pattern="[a-zA-Z0-9_]{6,24}$" ng-required="true" ng-minlength="6"/>
+                                 <label class="error" style="display:none"></label>
+                              </div>
+                              <div class="form-group">
+                                 <input type="password" custom-validate class="form-control input-daftar" id="password" name="password" placeholder="Kata sandi (min. 8 karakter)" onchange="form.password_confirmation.pattern = this.value;" title="Kata sandi" required ng-model="daftarData.password" ng-minlength="8"/>
+                                 <label class="error" style="display:none"></label>
+                              </div>
+                              <div class="form-group">
+                                 <input type="password" custom-validate class="form-control input-daftar" name="password_confirmation" placeholder="Ulangi kata sandi" title="Kata sandi tidak cocok" required match="#password"/>
+                                 <label class="error" style="display:none"></label>
+                              </div>
+                              <div class="form-group">
+                                 <input type="text" custom-validate class="form-control input-daftar" name="name" placeholder="Nama lengkap" pattern="[a-z A-Z.]{2,30}$" title="Penulisan Nama" required ng-model="daftarData.name" />
+                                 <label class="error" style="display:none"></label>
+                              </div>
+                              <div class="form-group">
+                                 <input type="email" custom-validate class="form-control input-daftar" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$" title="Email" ng-model="daftarData.email" required/>
+                                 <label class="error" style="display:none"></label>
+                              </div>
+                              <div class="row">
+                                 <div class="col register-gender">
+                                    <label>
+                                    <input type="radio" ng-model="daftarData.gender" value="1">
+                                    Laki-laki
+                                    </label>
+                                 </div>
+                                 <div class="col register-gender">
+                                    <label>
+                                    <input type="radio" ng-model="daftarData.gender"
+                                       value="0">
+                                    Perempuan
+                                    </label>
+                                 </div>
+                              </div>
+                              <div class="col left">
+                                 <label class="error" style="display:{{error.show}};">{{error.message}}</label>
+                              </div>
+                              <div class="col already-register">
+                                 <p>Sudah terdaftar?<a class="back-login" ui-sref="app.login"> Silahkan login.</a></p>
+                              </div>
+                              <p class="term-condition">Dengan mengklik 
+                                 <span class="span1"> Daftar</span>
+                                 , anda menyetujui ketentuan kami dan bahwa Anda telah membaca 
+                                 <span class="span1">Kebijakan Data</span> 
+                                 kami, termasuk<span class="span1"> Penggunaan Cookies.</span>
+                              </p>
+                              <div class="remember">
+                                 <input type="submit" name="submit" class="btn btn-default" value="DAFTAR">
+                                 <div class="clear"></div>
+                              </div>
+                              </p>
+                           </fieldset>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <div class="clear"></div>
+            </div>
+         </div>
+      </div>
+   </ion-content>
+</ion-view>
